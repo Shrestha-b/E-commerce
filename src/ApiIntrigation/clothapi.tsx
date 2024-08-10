@@ -34,7 +34,8 @@ const Clothapi: React.FC = () => {
 
   const getProducts = async () => {
     const URL = 'https://fakestoreapi.com/products';
-    
+    // const URL = "https://taobao-api.p.rapidapi.com/api";
+
     try {
       const response = await fetch(URL);
       if (!response.ok) {
@@ -82,7 +83,8 @@ const Clothapi: React.FC = () => {
       >
         {products.map((product) => (
           <View key={product.id} style={styles.cardContainer}>
-            <Image source={{ uri: product.image }} style={styles.image} />
+            {/* <Image source={{ uri: product.image }} style={styles.image} /> */}
+            <Text style={{fontSize: 20}}>{product.id}</Text>
             <View>
               <Text style={{color:Colors.black, fontSize:12,fontWeight:'500', marginTop: 10}}>Bring your store to life with Lumia</Text>
               <TouchableOpacity style={styles.button}>

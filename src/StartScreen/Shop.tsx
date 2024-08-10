@@ -37,7 +37,7 @@ const Shop: React.FC<ShopProps> = ({ navigation }) => {
   const [data, setData] = useState<DataItem[]>([]);
 
   const MensCloth = async (): Promise<void> => {
-    const url = 'https://jsonplaceholder.typicode.com/photos';
+    const url = 'https://jsonplaceholder.typicode.com/users';
     const result = await fetch(url);
     const data = await result.json();
     setData(data);
@@ -93,8 +93,9 @@ const Shop: React.FC<ShopProps> = ({ navigation }) => {
       
       {data.map((item: DataItem, index: number) => (
         <View key={index}>
-          <Image source={{ uri: item.url }} style={styles.image} />
-          {/* <Text style={{ fontSize: 30 }}>{item.id}</Text> */}
+          {/* <Image source={{ uri: item.url }} style={styles.image} /> */}
+          <Text style={{ fontSize: 30 }}>{item.id}</Text>
+
         </View>
       ))}
     </View>
@@ -111,6 +112,7 @@ const styles = StyleSheet.create({
   image:{ 
   height:RfH(148),
   width: RfW(160),
+  marginTop:10
 
   },
   right: {
