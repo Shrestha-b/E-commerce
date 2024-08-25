@@ -21,6 +21,7 @@ import UploadPhoto from '../Explore/UploadPhoto';
 import MyProfile from '../Propfile/Myprofile';
 import MatrimonyProfile from '../Matrimony/MatrimonyProfile';
 import Clothapi from '../ApiIntrigation/clothapi';
+import ShopAPI from '../ApiIntrigation/ShopAP';
 // import MainLogin from '../component/newProject/Login';
 const Stack = createNativeStackNavigator();
 
@@ -47,6 +48,7 @@ function HomeNavigation() {
         <Stack.Screen name="MetrimonyProfile" component={MatrimonyProfile} options={{headerShown: false}}/>
         <Stack.Screen name="Clothapi" component={Clothapi} options={{headerShown: false}}/>
 
+        <Stack.Screen name="ShopAPI" component={ShopAPI} options={{headerShown: false}}/>
 
       </Stack.Navigator>
     </NavigationContainer>

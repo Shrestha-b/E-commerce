@@ -12,12 +12,14 @@ import {
   NativeScrollEvent,
   FlatList,
   ListRenderItem,
+  Button
 } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { RfH, RfW, responsiveFontSize } from '../utils/helpers';
 import Fonts from '../themes/Fonts';
 import Images from '../themes/Images';
 import Head from '../Header/Head';
+import ShopAPI from '../ApiIntrigation/ShopAP';
 
 interface ShopProps {
   navigation: NavigationProp<any>;
@@ -30,7 +32,7 @@ interface DataItem {
   thumbnailUrl: string;
 }
 
-const Shop: React.FC<ShopProps> = ({ navigation }) => {
+const Shop: React.FC<ShopProps> = ({ navigation }:any) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [data, setData] = useState<DataItem[]>([]);
   const scrollX = useRef(new Animated.Value(0)).current;
@@ -85,8 +87,8 @@ const Shop: React.FC<ShopProps> = ({ navigation }) => {
           decelerationRate="fast"
           scrollEventThrottle={16}
         />
-       
       </View>
+       <Button title='hello' onPress={() => navigation.navigate(ShopAPI)}/>
     </View>
   );
 };
