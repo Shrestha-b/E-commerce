@@ -121,8 +121,8 @@ const styles = StyleSheet.create({
     
   },
   textInput: {
-    height: 48,
-    width: 300,
+    height: RfH(48),
+    width: RfW(300),
     backgroundColor: '#FFF',
     borderRadius: 50,
     justifyContent: 'center',

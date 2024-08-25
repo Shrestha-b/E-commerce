@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import {
   View,
   Image,
@@ -13,9 +13,18 @@ import {RfH, RfW} from '../utils/helpers';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Fonts from '../themes/Fonts';
 import {responsiveFontSize} from '../utils/helpers';
+import { launchCamera,Asset, ImagePickerResponse, launchImageLibrary } from 'react-native-image-picker';
 
+
+interface ImagePickerResult extends ImagePickerResponse {
+  assets?: Asset[];
+}
+interface ImagePickerResult extends ImagePickerResponse {
+    assets?: Asset[];
+  }
 // create a component
 const UploadPhoto = ({navigation}: any) => {
+  
   return (
     <View style={styles.container}>
       <AiHade navigation={navigation} />
@@ -24,6 +33,31 @@ const UploadPhoto = ({navigation}: any) => {
 };
 
 const AiHade = ({navigation}: any) => {
+  const [imgUrl, setImgUrl] = useState<string>("https://source.unsplash.com/random/400x300");
+  //   const [imgUrl, setImgUrl] = useState<string>("https://source.unsplash.com/random/400x300");
+    const openCamera = async () => {
+      console.log('PRESS====>>>>');
+      const result: ImagePickerResult = await launchCamera({
+        mediaType: 'photo',
+        saveToPhotos: true, 
+      });
+      console.log('PRESS=======>>>>>', result);
+  
+      if (result.assets && result.assets.length > 0) {
+        setImgUrl(result.assets[0].uri || imgUrl);
+      }
+    };
+    const openAlbum = async () => {
+      console.log('PRESS====>>>>');
+      const result: ImagePickerResult = await launchImageLibrary({
+        mediaType: 'photo', // or 'video' or 'mixed'
+      });
+      console.log('PRESS=======>>>>>', result);
+  
+      if (result.assets && result.assets.length > 0) {
+          setImgUrl(result.assets[0].uri || imgUrl);
+        }
+    }
   return (
     <View style={styles.aiHadeContainer}>
       <View style={styles.row}>
@@ -41,14 +75,24 @@ const AiHade = ({navigation}: any) => {
 
       <View style={styles.txtbtn}>
       <View style={styles.centerMainBox}>
-        <Image style={styles.mainImg} source={Images.uploadImg} />
+        {/* <Image style={styles.mainImg} source={Images.uploadImg} /> */}
+        <Image
+        resizeMode="contain"
+        style={styles.mainImg}
+        source={{ uri: imgUrl }}
+      />
         <View style={styles.smallcontainer}>
+          <TouchableOpacity onPress={openAlbum}>
           <View style={styles.box}>
             <Image style={styles.smallcontainerImg} source={Images.addPic} />
           </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={openCamera}>
           <View style={styles.box}>
           <Image style={styles.smallcontainerImg} source={Images.addPic} />
           </View>
+          </TouchableOpacity>
+
         </View>
       </View>
         <View>

@@ -31,8 +31,10 @@ const Images = {
   rightarrow: require("../assest/Imageses/Rightarrow.png"),
   footerImg: require("../assest/Imageses/FooterImg.png"),
   circlearrow: require("../assest/Imageses/circlearrow.png"),
+  backarrow2: require("../assest/Imageses/backarrow2.png"),
+  banjaraworld: require("../assest/Imageses/banjaraworld.png"),
+
 
 };
-
 export default Images;
  

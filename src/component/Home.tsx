@@ -2,6 +2,7 @@ import { NavigationProp } from '@react-navigation/native';
 import { Button, StyleSheet,Image, Text, TouchableOpacity, View } from 'react-native';
 import CustomHeader from '../comonents/CustomHeader';
 import Images from '../themes/Images';
+import { RfH, RfW } from '../utils/helpers';
 
 const Home = ({ navigation }: { navigation: NavigationProp<any> }) => {
     <CustomHeader
@@ -10,10 +11,12 @@ const Home = ({ navigation }: { navigation: NavigationProp<any> }) => {
     onBackPressHandler={() => {}}
   />
   return (
-    <View>
+    <View style={styles.container}>
+      <View>
       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('horizontalscrollView') }>
-        <Text>Press Here</Text>
+        <Image style={styles.banjaraworld} source={Images.banjaraworld} />
       </TouchableOpacity>
+      </View>
       {/* <Text>Hello</Text> */}
       
     </View>
@@ -23,10 +26,20 @@ const Home = ({ navigation }: { navigation: NavigationProp<any> }) => {
 
 
 const styles = StyleSheet.create({
+  container:{
+    //  justifyContent:'center',
+    textAlign:'center',
+    marginTop:220,
+    backgroundColor:'white'
+    },
     button: {
         alignItems: 'center',
-        backgroundColor: '#DDDDDD',
-        padding: 10,
+        padding: 10
       },
+      banjaraworld:{
+        height: RfH(230),
+        width: RfW(200),
+      },
+     
 })
 export default Home;

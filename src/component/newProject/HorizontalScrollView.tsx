@@ -57,10 +57,15 @@ const HorizontalScrollView = ({navigation}:any) => {
           colors={['#FFFFFF','#FFFFFF', '#FF5069']}
           style={styles.linearGradient}>
           <View style={styles.box}>
+           
+            <View style={{flexDirection:'row', marginTop:-70, }}>
+            <Image source={Images.backarrow2} />
             <TouchableOpacity onPress={()=>navigation.navigate('mainlogin')}>
             <Text style={styles.skipTxt}>skip</Text>
             </TouchableOpacity>
           
+            </View>
+           
             <Image style={styles.thirdImg} source={Images.thirdImg} />
             <Text style={styles.text}> 
               Embrace Banjara Traditions{'\n'} Through Shopping
@@ -105,7 +110,6 @@ const styles = StyleSheet.create({
   skipTxt: {
     fontWeight: '500',
     fontSize: 14,
-    marginTop: 10,
     marginLeft: 306,
     marginBottom: 60,
   },
