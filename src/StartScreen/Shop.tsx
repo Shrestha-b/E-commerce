@@ -88,6 +88,7 @@ const Shop: React.FC<ShopProps> = ({ navigation }:any) => {
           scrollEventThrottle={16}
         />
       </View>
+      <Text>hello</Text>
        <Button title='hello' onPress={() => navigation.navigate(ShopAPI)}/>
     </View>
   );
