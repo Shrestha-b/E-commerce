@@ -13,7 +13,7 @@ const App = () => {
         <PaperProvider>
           <HomeNavigation />
           {/* <MyComponent /> */}
-        </PaperProvider>
+        </PaperProvider> 
       </ReduxProvider>
     </>
   );

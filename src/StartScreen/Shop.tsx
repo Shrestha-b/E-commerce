@@ -20,6 +20,8 @@ import Fonts from '../themes/Fonts';
 import Images from '../themes/Images';
 import Head from '../Header/Head';
 import ShopAPI from '../ApiIntrigation/ShopAP';
+import Combo from '../redux/Combo';
+import { StringConst } from '../utils/constants';
 
 interface ShopProps {
   navigation: NavigationProp<any>;
@@ -59,10 +61,10 @@ const Shop: React.FC<ShopProps> = ({ navigation }:any) => {
     setActiveIndex(index);
   };
 
-  const renderItem: ListRenderItem<DataItem> = ({item}) => (
+  const renderItem: ListRenderItem<DataItem> = ({item}:any) => (
     <View style={styles.itemContainer}>
-      <Image source={{ uri: item.url }} style={styles.image} />
-      <Text style={styles.itemText}>{item.title}</Text>
+      <Image source={{ uri: item.image }} style={styles.image} /> 
+      <Text>{StringConst.priceUnit}{item.price}</Text>
     </View>
   );
 
@@ -90,6 +92,7 @@ const Shop: React.FC<ShopProps> = ({ navigation }:any) => {
       </View>
       <Text>hello</Text>
        <Button title='hello' onPress={() => navigation.navigate(ShopAPI)}/>
+       <Button title='Redux' onPress={() => navigation.navigate(Combo)}/>
     </View>
   );
 };
@@ -127,6 +130,8 @@ const styles = StyleSheet.create({
   itemContainer: {
     width: RfW(160),
     padding: 10,
+    flexWrap:'wrap',
+    flexDirection:'column'
   },
   itemText: {
     fontSize: 16,

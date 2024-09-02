@@ -22,6 +22,9 @@ import MyProfile from '../Propfile/Myprofile';
 import MatrimonyProfile from '../Matrimony/MatrimonyProfile';
 import Clothapi from '../ApiIntrigation/clothapi';
 import ShopAPI from '../ApiIntrigation/ShopAP';
+import Products from '../redux/Products';
+import CartHeader from '../redux/CartHearder';
+import Combo from '../redux/Combo';
 // import MainLogin from '../component/newProject/Login';
 const Stack = createNativeStackNavigator();
 
@@ -47,7 +50,9 @@ function HomeNavigation() {
         <Stack.Screen name="MyProfile" component={MyProfile} options={{headerShown: false}}/>
         <Stack.Screen name="MetrimonyProfile" component={MatrimonyProfile} options={{headerShown: false}}/>
         <Stack.Screen name="Clothapi" component={Clothapi} options={{headerShown: false}}/>
-
+        <Stack.Screen name="Products" component={Products} options={{headerShown: false}}/>
+        <Stack.Screen name="CartHeader" component={CartHeader} options={{headerShown: false}}/>
+        <Stack.Screen name="Combo" component={Combo} options={{headerShown: false}}/>
         <Stack.Screen name="ShopAPI" component={ShopAPI} options={{headerShown: false}}/>
 
       </Stack.Navigator>
