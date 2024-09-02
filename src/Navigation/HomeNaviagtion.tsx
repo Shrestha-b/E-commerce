@@ -25,6 +25,8 @@ import ShopAPI from '../ApiIntrigation/ShopAP';
 import Products from '../redux/Products';
 import CartHeader from '../redux/CartHearder';
 import Combo from '../redux/Combo';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import StoreData from '../AsyncStorage.tsx/StoreData';
 // import MainLogin from '../component/newProject/Login';
 const Stack = createNativeStackNavigator();
 
@@ -54,6 +56,7 @@ function HomeNavigation() {
         <Stack.Screen name="CartHeader" component={CartHeader} options={{headerShown: false}}/>
         <Stack.Screen name="Combo" component={Combo} options={{headerShown: false}}/>
         <Stack.Screen name="ShopAPI" component={ShopAPI} options={{headerShown: false}}/>
+        <Stack.Screen name="StoreData" component={StoreData} options={{headerShown: false}}/>
 
       </Stack.Navigator>
     </NavigationContainer>

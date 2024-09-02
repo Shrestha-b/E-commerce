@@ -16,7 +16,7 @@ import Images from '../themes/Images';
 import {isEmpty} from 'lodash';
 import {useNavigation} from '@react-navigation/native';
 
-const CustomHeader = props => {
+const CustomHeader = ({props}:any) => {
   const {
     headerTitle,
     onBackPressHandler,

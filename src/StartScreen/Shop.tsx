@@ -124,14 +124,16 @@ const styles = StyleSheet.create({
   },
   image: {
     height: RfH(148),
-    width: RfW(160),
+    width: RfW(100),
     marginTop: 10,
   },
   itemContainer: {
     width: RfW(160),
     padding: 10,
-    flexWrap:'wrap',
-    flexDirection:'column'
+    // flexWrap:'wrap',
+    // flexDirection:'column'
+    flexDirection: "column",
+    flexWrap: "wrap"
   },
   itemText: {
     fontSize: 16,

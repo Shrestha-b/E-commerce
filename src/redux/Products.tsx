@@ -5,7 +5,6 @@ import { RfH, RfW } from '../utils/helpers'; // Import helpers if needed
 import { useDispatch, UseDispatch } from 'react-redux';
 import { AddToCart } from './Action';
 import { ADD_TO_CART } from './Constant';
-import { addTodo } from '../features/todo/todoslice';
 // Define the Product type
 
 interface Product {

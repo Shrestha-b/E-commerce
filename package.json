@@ -1,5 +1,5 @@
 {
-  "name": "AwesomeProject",
+  "name": "awesomeproject",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^2.0.0",
     "@react-navigation/bottom-tabs": "^6.6.0",
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/native-stack": "^6.10.0",
