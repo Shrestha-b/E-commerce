@@ -1,6 +1,9 @@
 import { combineReducers } from "redux";
-import { reducer } from "./Reducer";
+import cartReducer from "./Reducer";  // Assuming this is where you handle cartItems
 
-export default combineReducers({
-    reducer
-})
+// Combine reducers and use a key for each reducer
+const RootReducer = combineReducers({
+    cart: cartReducer  // Use 'cart' as the key for the cartReducer
+});
+
+export default RootReducer;

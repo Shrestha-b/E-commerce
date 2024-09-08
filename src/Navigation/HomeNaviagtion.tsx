@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -57,7 +56,6 @@ function HomeNavigation() {
         <Stack.Screen name="Combo" component={Combo} options={{headerShown: false}}/>
         <Stack.Screen name="ShopAPI" component={ShopAPI} options={{headerShown: false}}/>
         <Stack.Screen name="StoreData" component={StoreData} options={{headerShown: false}}/>
-
       </Stack.Navigator>
     </NavigationContainer>
   );
