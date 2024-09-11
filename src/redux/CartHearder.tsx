@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
@@ -12,6 +11,7 @@ const CartHeader: React.FC = () => {
     useEffect(() => {
         setCartData(cartItems.length); 
     }, [cartItems]);
+    
 
     return (
         <View style={styles.Container}>
