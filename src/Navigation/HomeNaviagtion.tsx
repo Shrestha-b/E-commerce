@@ -1,5 +1,5 @@
+
 import * as React from 'react';
-import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from '../component/Home';
@@ -26,36 +26,64 @@ import CartHeader from '../redux/CartHearder';
 import Combo from '../redux/Combo';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import StoreData from '../AsyncStorage.tsx/StoreData';
-// import MainLogin from '../component/newProject/Login';
-const Stack = createNativeStackNavigator();
+
+
+// Define the param list for type safety
+type StackParamList = {
+  Home: undefined;
+  mainlogin: undefined;
+  horizontalscrollView: undefined;
+  explorematrimony: undefined;
+  newepl: undefined;
+  horverificationnew: undefined;
+  nameai: undefined;
+  homescreen: undefined;
+  mytabs: undefined;
+  emailaddress: undefined;
+  age: undefined;
+  aiheight: undefined;
+  gender: undefined;
+  marriagestatus: undefined;
+  uploadphoto: undefined;
+  MyProfile: undefined;
+  MetrimonyProfile: undefined;
+  Clothapi: undefined;
+  Products: any;
+  CartHeader: undefined;
+  Combo: undefined;
+  ShopAPI: undefined;
+  StoreData: undefined;
+};
+
+const Stack = createNativeStackNavigator<StackParamList>();
 
 function HomeNavigation() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} options={{headerShown: false}}/>
-        <Stack.Screen name="mainlogin" component={MainLogin}  />
-        <Stack.Screen name="horizontalscrollView" component={HorizontalScrollView} options={{headerShown: false}}/>
-        <Stack.Screen name="explorematrimony" component={ExploreMatrimony} options={{headerShown: false}}/>
-        <Stack.Screen name="newepl" component={NewEpl} options={{headerShown: false}}/>
-        <Stack.Screen name="horverificationnew" component={VerificationNew} options={{headerShown: false}}/>
-        <Stack.Screen name="nameai" component={NameAI} options={{headerShown: false}}/>
-        <Stack.Screen name="homescreen" component={HomeScreen} options={{headerShown: false}}/>
-        <Stack.Screen name="mytabs" component={MyTabs} options={{headerShown: false}}/>
-        <Stack.Screen name="emailaddress" component={EmailAddress} options={{headerShown: false}}/>
-        <Stack.Screen name="age" component={Age} options={{headerShown: false}}/>
-        <Stack.Screen name="aiheight" component={AiHeight} options={{headerShown: false}}/>
-        <Stack.Screen name="gender" component={Gender} options={{headerShown: false}}/>
-        <Stack.Screen name="marriagestatus" component={MarriageStatus} options={{headerShown: false}}/>
-        <Stack.Screen name="uploadphoto" component={UploadPhoto} options={{headerShown: false}}/>
-        <Stack.Screen name="MyProfile" component={MyProfile} options={{headerShown: false}}/>
-        <Stack.Screen name="MetrimonyProfile" component={MatrimonyProfile} options={{headerShown: false}}/>
-        <Stack.Screen name="Clothapi" component={Clothapi} options={{headerShown: false}}/>
-        <Stack.Screen name="Products" component={Products} options={{headerShown: false}}/>
-        <Stack.Screen name="CartHeader" component={CartHeader} options={{headerShown: false}}/>
-        <Stack.Screen name="Combo" component={Combo} options={{headerShown: false}}/>
-        <Stack.Screen name="ShopAPI" component={ShopAPI} options={{headerShown: false}}/>
-        <Stack.Screen name="StoreData" component={StoreData} options={{headerShown: false}}/>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+        <Stack.Screen name="mainlogin" component={MainLogin} />
+        <Stack.Screen name="horizontalscrollView" component={HorizontalScrollView} options={{ headerShown: false }} />
+        <Stack.Screen name="explorematrimony" component={ExploreMatrimony} options={{ headerShown: false }} />
+        <Stack.Screen name="newepl" component={NewEpl} options={{ headerShown: false }} />
+        <Stack.Screen name="horverificationnew" component={VerificationNew} options={{ headerShown: false }} />
+        <Stack.Screen name="nameai" component={NameAI} options={{ headerShown: false }} />
+        <Stack.Screen name="homescreen" component={HomeScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="mytabs" component={MyTabs} options={{ headerShown: false }} />
+        <Stack.Screen name="emailaddress" component={EmailAddress} options={{ headerShown: false }} />
+        <Stack.Screen name="age" component={Age} options={{ headerShown: false }} />
+        <Stack.Screen name="aiheight" component={AiHeight} options={{ headerShown: false }} />
+        <Stack.Screen name="gender" component={Gender} options={{ headerShown: false }} />
+        <Stack.Screen name="marriagestatus" component={MarriageStatus} options={{ headerShown: false }} />
+        <Stack.Screen name="uploadphoto" component={UploadPhoto} options={{ headerShown: false }} />
+        <Stack.Screen name="MyProfile" component={MyProfile} options={{ headerShown: false }} />
+        <Stack.Screen name="MetrimonyProfile" component={MatrimonyProfile} options={{ headerShown: false }} />
+        <Stack.Screen name="Clothapi" component={Clothapi} options={{ headerShown: false }} />
+        <Stack.Screen name="Products" component={Products} options={{ headerShown: false }} />
+        <Stack.Screen name="CartHeader" component={CartHeader} options={{ headerShown: false }} />
+        <Stack.Screen name="Combo" component={Combo} options={{ headerShown: false }} />
+        <Stack.Screen name="ShopAPI" component={ShopAPI} options={{ headerShown: false }} />
+        <Stack.Screen name="StoreData" component={StoreData} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

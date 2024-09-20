@@ -1,11 +1,21 @@
-import React, {useEffect, useState} from 'react';
-import {FC} from 'react';
-import {Image, View, ScrollView, Text, StyleSheet, Button} from 'react-native';
-import {RfH, RfW} from '../utils/helpers'; // Import helpers if needed
-import {useDispatch, useSelector} from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { FC } from 'react';
+import { Image, View, ScrollView, Text, StyleSheet, Button } from 'react-native';
+import { RfH, RfW } from '../utils/helpers'; // Import helpers if needed
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart } from './Action';
 
-import {addToCart} from './Action';
-import {State} from 'react-native-gesture-handler';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
+// Define the parameter types for each screen in the stack
+type StackParamList = {
+  Home: undefined;
+  Products: { item: Product[] }; // Assuming Products screen expects an array of Product as route params
+  // Add other screen types here as needed
+};
+
+// Define props for the Products screen
+type ProductsScreenProps = NativeStackScreenProps<StackParamList, 'Products'>;
 
 // Define the Product type
 interface Product {
@@ -17,54 +27,53 @@ interface Product {
 
 // Define the props for the Products component
 interface ProductsProps {
-  item: Product[]; // item is now an array of Product objects
+  item: Product[]; // item is an array of Product objects
 }
 
 // Products component definition
-const Products: FC<ProductsProps> = ({item}: any) => {
-  const [IsAdded, setIsAdded] = useState<any>(false);
-  const [IsAddeds, setIsAddeds] = useState<any>(true);
-
+const Products: FC<ProductsProps> = ({ item }) => {
+  const [addedToCart, setAddedToCart] = useState<{ [key: number]: boolean }>({}); // Track added status by product ID
   const dispatch = useDispatch();
   const cartItems = useSelector((state: any) => state.cart.cartItems || []);
 
   useEffect(() => {
-
-    if (cartItems && cartItems.length) {
-        cartItems.forEach((element: any) => {
-        if(element.Name === item.Name) {
-            setIsAdded(true);
-        }
-      });
-    }
-  }, [cartItems]);
+    const addedStatus: { [key: number]: boolean } = {};
+    item.forEach((product) => {
+      const isProductInCart = cartItems.some((cartItem: Product) => cartItem.id === product.id);
+      addedStatus[product.id] = isProductInCart;
+    });
+    setAddedToCart(addedStatus);
+  }, [cartItems, item]);
 
   const handleAddtoCart = (product: Product) => {
     dispatch(addToCart(product));
-    // console.warn("Added to cart", product);
+  };
+
+  const handleRemoveFromCart = (productId: number) => {
+    // Implement the logic to remove the product from the cart
+    // For example: dispatch(removeFromCart(productId));
   };
 
   return (
     <ScrollView>
-      {item.map((product: any) => (
+      {item.map((product) => (
         <View key={product.id} style={styles.productContainer}>
           <Text style={styles.productText}>{product.Name}</Text>
           <Text style={styles.productText}>{product.id}</Text>
           <Text style={styles.productText}>{product.Price}</Text>
-          <Image style={styles.Img} source={{uri: product.Image}} />
+          <Image style={styles.Img} source={{ uri: product.Image }} />
 
-          {
-  IsAdded
-    ? <Button
-        title="Remove from cart"
-        onPress={() => {}}
-      />
-    : <Button
-        title="Add to cart"
-        onPress={() => handleAddtoCart(product)}
-      />
-}
-
+          {addedToCart[product.id] ? (
+            <Button
+              title="Remove from cart"
+              onPress={() => handleRemoveFromCart(product.id)}
+            />
+          ) : (
+            <Button
+              title="Add to cart"
+              onPress={() => handleAddtoCart(product)}
+            />
+          )}
         </View>
       ))}
     </ScrollView>

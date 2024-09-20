@@ -4,7 +4,7 @@ import CustomHeader from '../comonents/CustomHeader';
 import Images from '../themes/Images';
 import { RfH, RfW } from '../utils/helpers';
 
-const Home = ({ navigation }: { navigation: NavigationProp<any> }) => {
+const Home = ({ navigation }: { navigation:any }) => {
     <CustomHeader
     headerTitle={'Notification'}
     showcart={false}
