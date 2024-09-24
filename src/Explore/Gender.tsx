@@ -1,18 +1,12 @@
-import React, { useState } from 'react';
-import {
-  View,
-  Image,
-  TouchableOpacity,
-  Text,
-  StyleSheet,
-} from 'react-native';
+import React, {useState} from 'react';
+import {View, Image, TouchableOpacity, Text, StyleSheet} from 'react-native';
 import Images from '../themes/Images';
-import { RfH, RfW } from '../utils/helpers';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import {RfH, RfW} from '../utils/helpers';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Fonts from '../themes/Fonts';
-import { responsiveFontSize } from '../utils/helpers';
+import {responsiveFontSize} from '../utils/helpers';
 
-const Gender = ({ navigation }: any) => {
+const Gender = ({navigation}: any) => {
   return (
     <View style={styles.container}>
       <AiHade navigation={navigation} />
@@ -20,7 +14,7 @@ const Gender = ({ navigation }: any) => {
   );
 };
 
-const AiHade = ({ navigation }: any) => {
+const AiHade = ({navigation}: any) => {
   const [selectedGender, setSelectedGender] = useState<string | null>(null);
 
   const handleGenderSelect = (gender: string) => {
@@ -32,39 +26,53 @@ const AiHade = ({ navigation }: any) => {
       <View style={styles.row}>
         <TouchableOpacity
           style={styles.touchableOpacity}
-          onPress={() => navigation.goBack()}
-        >
+          onPress={() => navigation.goBack()}>
           <Image style={styles.backarrow} source={Images.backarrow} />
         </TouchableOpacity>
+
         <View style={styles.containers}>
           <View style={styles.line}>
             <View style={styles.part1} />
           </View>
         </View>
       </View>
+
       <Text style={styles.name}>What’s Your Gender?</Text>
       <Text style={styles.subText}>Tell us about your gender</Text>
-      <View style={styles.txtbtn}>
-        <TouchableOpacity onPress={() => handleGenderSelect('Male')}>
-          <View style={[styles.genderOption, selectedGender === 'Male' ? styles.selected : styles.unselected]}>
-            <Image source={Images.Male} />
-            <Text style={styles.genderText}>Male</Text>
-          </View>
-        </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => handleGenderSelect('Female')}>
-          <View style={[styles.genderOption, selectedGender === 'Female' ? styles.selected : styles.unselected]}>
-            <Image source={Images.female} />
-            <Text style={styles.genderText}>Female</Text>
-          </View>
-        </TouchableOpacity>
+      <View style={styles.txtbtn}>
+        <View>
+          <TouchableOpacity onPress={() => handleGenderSelect('Male')}>
+            <View
+              style={[
+                styles.genderOption,
+                selectedGender === 'Male' ? styles.selected : styles.unselected,
+              ]}>
+              <Image source={Images.Male} />
+              <Text style={styles.genderText}>Male</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => handleGenderSelect('Female')}>
+            <View
+              style={[
+                styles.genderOption,
+                selectedGender === 'Female'
+                  ? styles.selected
+                  : styles.unselected,
+              ]}>
+              <Image source={Images.female} />
+              <Text style={styles.genderText}>Female</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate('marriagestatus')}>
+            <Text style={styles.btnText}>Continue</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('marriagestatus')}
-      >
-        <Text style={styles.btnText}>Continue</Text>
-      </TouchableOpacity>
     </View>
   );
 };
@@ -82,20 +90,21 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
+    marginTop: 18,
   },
   touchableOpacity: {
     marginLeft: 20,
   },
   backarrow: {
-    width: 24,
-    height: 24,
-    marginTop: 10,
+    width: RfW(24),
+    height: RfH(24),
+    // marginTop: 10,
+    verticalAlign: 'middle',
   },
   containers: {
     flex: 1,
     marginLeft: 77,
-    marginTop: 18,
+    verticalAlign: 'middle',
   },
   line: {
     flexDirection: 'row',
@@ -105,10 +114,10 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 50,
     borderTopRightRadius: 50,
     backgroundColor: '#FFE9F1',
-    height: RfW(8),
+    height: RfH(8),
   },
   part1: {
-    width: 121,
+    width: RfW(121),
     backgroundColor: '#FF5069',
     borderRadius: 50,
   },
@@ -130,16 +139,17 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     height: RfH(569),
     width: RfW(300),
-    marginTop: 41,
+    // marginTop: 41,
+    marginBottom: 30,
   },
   button: {
     borderRadius: 10,
-    height: 51,
-    width: 319,
+    height: RfH(51),
+    width: RfW(319),
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#FF5069',
-    marginTop: 500,
+    // marginBottom:20
   },
   btnText: {
     color: Colors.white,
@@ -148,13 +158,13 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   genderOption: {
-    width: 150,
-    height: 150,
+    width: RfW(150),
+    height: RfH(150),
     borderRadius: 100,
     alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 48
+    marginTop: 48,
   },
   selected: {
     backgroundColor: '#FF5069',
@@ -163,7 +173,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#F0E4E6',
   },
   genderText: {
-    marginTop: 10,
     color: Colors.white,
   },
 });

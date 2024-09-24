@@ -105,18 +105,18 @@ const styles = StyleSheet.create({
   },
   line: {
     flexDirection: 'row',
-    width: RfW(180),
+    width: 180,
     borderTopLeftRadius: 50,
     borderBottomLeftRadius: 50,
     borderBottomRightRadius: 50,
     borderTopRightRadius: 50,
     backgroundColor: '#FFE9F1',
-    height: RfW(8), // Set the height of the line
+    height: RfH(8),
   },
   part1: {
     width: 100,
-    backgroundColor: '#FF5069s',
-    borderRadius: 50, // Color for the first part
+    backgroundColor: '#FF5069',
+    borderRadius: 50,
   },
   name: {
     fontSize: 18,

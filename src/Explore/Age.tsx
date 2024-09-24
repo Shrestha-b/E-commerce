@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import {
   View,
   Image,
@@ -12,6 +12,7 @@ import {RfH, RfW} from '../utils/helpers';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Fonts from '../themes/Fonts';
 import {responsiveFontSize} from '../utils/helpers';
+import { Picker } from 'react-native-wheel-pick';
 
 // create a component
 const Age = ({navigation}:any) => {
@@ -23,28 +24,55 @@ const Age = ({navigation}:any) => {
 };
 
 const AiHade = ({navigation}:any) => {
+  const [selectedHeight, setSelectedHeight] = useState<string>('150 cm');
+
+  const heightItems = Array.from(
+    {length: 150},
+    (_, index) => `${index + 1} `,
+  );
+
+  const handleValueChange = (value: string) => {
+    setSelectedHeight(value);
+    // console.log(value);
+  };
   return (
     <View style={styles.aiHadeContainer}>
       <View style={styles.row}>
+        
         <TouchableOpacity style={styles.touchableOpacity} onPress={() => navigation.goBack()}>
           <Image style={styles.backarrow} source={Images.backarrow} />
         </TouchableOpacity>
+
         <View style={styles.containers}>
           <View style={styles.line}>
             <View style={styles.part1} />
           </View>
         </View>
+        
       </View>
+
+      <View style={styles.TXTStyle}>
+
       <Text style={styles.name}>How old are you?</Text>
       <Text style={styles.subText}>Please provide your age in years</Text>
 
-      <View style={styles.txtbtn}>
+      </View>
 
-        <View>
-          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('aiheight')}>
-            <Text style={styles.btnText}>Continue</Text>
-          </TouchableOpacity>
-        </View>
+      <View style={styles.txtbtn}>
+      <Picker
+          style={styles.picker}
+          selectedValue={selectedHeight}
+          pickerData={heightItems}
+          onValueChange={handleValueChange}
+      >
+    
+      {/* <View style={styles.pickerline} /> */}
+      </Picker>
+
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('aiheight')}>
+        <Text style={styles.btnText}>Continue</Text>
+      </TouchableOpacity>
+
       </View>
     </View>
   );
@@ -59,12 +87,11 @@ const styles = StyleSheet.create({
   },
   aiHadeContainer: {
     alignItems: 'center',
-    flex: 1,
   },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
+    // marginBottom: 20,
   },
   touchableOpacity: {
     marginLeft: 20,
@@ -98,7 +125,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     textAlign: 'center',
-    marginTop: 50,
     color: Colors.black,
   },
   subText: {
@@ -108,12 +134,13 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   txtbtn: {
-    flex: 1,
-    // justifyContent: 'space-between',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
     height: RfH(569),
     width: RfW(300),
-    marginTop: 41
-    
+    marginTop: 41,
+    marginBottom: 20,
+    alignItems:'center'
   },
   textInput: {
     height: 48,
@@ -130,12 +157,11 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 10,
-    height: 51,
-    width: 319,
+    height: RfH(51),
+    width: RfW(319),
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#FF5069',
-    marginTop: 500,
   },
   btnText: {
     color: Colors.white,
@@ -143,6 +169,21 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.UextraBold,
     fontWeight: '700',
   },
+  picker: {
+    width: RfW(100),
+    height: RfH(377),
+    
+  },
+  pickerline:{
+    height: 1, // Line height
+    backgroundColor: 'black', // Line color
+    width: '100%', // Line width (full width)
+    marginVertical: 10, 
+
+  },
+  TXTStyle:{
+    marginTop: 60
+  }
 });
 
 //make this component available to the app

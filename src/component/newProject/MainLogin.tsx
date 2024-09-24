@@ -4,7 +4,7 @@ import {
   TextInput,
   Text,
   Image,
-  SafeAreaView,
+  Modal,
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
@@ -13,59 +13,60 @@ import LinearGradient from 'react-native-linear-gradient';
 import Images from '../../themes/Images';
 import { RfH, RfW, responsiveFontSize } from '../../utils/helpers';
 import Fonts from '../../themes/Fonts';
+import PhoneInput from 'react-native-phone-number-input';
+import { Checkbox } from 'react-native-paper';
 
-const MainLogin = ({navigation}:any) => {
+typeinferance:{}
+const MainLogin:React.FC  = ({navigation}:any) => {
   const [isSelected, setSelection] = useState(false);
-  console.log(Images.flag);
   return (
     <View style={styles.container}>
-      <LinearGradient colors={['white', '#FFFFFF', '#FF5069']} style={styles.linearGradient}>
+      <View style={styles.mainFlex}>
         <Text style={styles.login}>Login</Text>
         <Text style={styles.txt1}>
           We'll need your phone number to send an {'\n'}OTP for verification.
         </Text>
-        <SafeAreaView>
-          <View style={styles.input}>
             <TextInput
               // value={number}
               placeholder="Enter your name"
-              // keyboardType="numeric"
+              keyboardType="numeric"
+              style={styles.inputStyle}
             />
-          </View>
-        </SafeAreaView>
-        <SafeAreaView style={styles.phoneInputContainer}>
-          <View style={styles.textInput}>
-            <Image style={styles.flagImage} source={Images.flag} />
-            <Text style={styles.text91}>+91</Text>
-            <Image style={styles.dropdownarrow} source={Images.dropdownarrow} />
-            <Text style={styles.divider}>|</Text>
-            <TextInput
-              style={styles.textInputStyle}
-              placeholder="Enter phone number"
-              placeholderTextColor={Colors.appcolor}
-              keyboardType="phone-pad"
-              // value={phoneNumber}
-              // onChangeText={setPhoneNumber}
-              maxLength={10}
-            />
-          </View>
-        </SafeAreaView>
-
+        <View style={{height:70}}>
+        <PhoneInput
+            // ref={phoneInput}
+            // defaultValue={value}
+            defaultCode="DM"
+            layout="first"
+            onChangeText={(text) => {
+              // setValue(text);
+            }}
+            onChangeFormattedText={(text) => {
+              // setFormattedValue(text);
+            }}
+            withDarkTheme
+            withShadow
+            autoFocus
+          />
+        </View>      
         <Text style={styles.checkboxText}>
           Checkbox for Terms and Conditions, Privacy Policy hyperlink
         </Text>
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('horverificationnew')}>
           <Text style={styles.continue}>Continue</Text>
         </TouchableOpacity>
-      </LinearGradient>
+        {/* <CountryPickers/> */}
+      </View>
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+    alignItems: 'center'
   },
   input: {
     height: 56,
@@ -78,11 +79,9 @@ const styles = StyleSheet.create({
    width:7.5
     },
   text91: {
-    marginTop: RfH(18),
-    color: Colors.appcolor,
+    color: "#262626",
     fontFamily: Fonts.UfontBold,
     fontSize: responsiveFontSize(18),
-    marginBottom: 10
   },
   divider:{
     fontSize: 25
@@ -91,21 +90,23 @@ const styles = StyleSheet.create({
     color: Colors.appcolor,
     fontFamily: Fonts.UfontBold,
     fontSize: responsiveFontSize(18),
-    marginLeft: RfW(5),
-    width: '80%',
+    height: RfH(56),
+    width :220
   },
   textInput: {
     flexDirection: 'row',
     alignItems: 'center',
     width: 325,
     height: 56,
-    paddingHorizontal: 10,
+    justifyContent:'space-around',
+    borderRadius: 10,
     backgroundColor:Colors.white
   },
   login: {
     fontSize: 24,
     fontWeight: '600',
     textAlign: 'center',
+    color:Colors.black
   },
   checkboxContainer: {
     flexDirection: 'row',
@@ -113,8 +114,9 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   flagImage: {
-    height: 30,
-    width: 30,
+    height: 35.6,
+    width: 35.6,
+    marginLeft: 1.68
   },
   checkboxText: {
     marginTop: 15,
@@ -130,6 +132,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: 'center',
     marginBottom: 20,
+    color: '#333333'
   },
   button: {
     alignItems: 'center',
@@ -145,17 +148,44 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
   },
-  linearGradient: {
+  mainFlex: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 15,
+    height:RfH(392),
+    width:RfW(325),
+    gap:30
   },
   phoneInputContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "space-between",
+    // alignItems: 'center',
   },
+  inputStyle:{
+    height: RfH(56),
+    width: RfW(300),
+    borderRadius: 10,
+    fontSize: 20,
+    backgroundColor:Colors.white,
+    paddingLeft: 10
+  },
+  line: {
+    width: 1,
+    height: 24,
+    backgroundColor: '#D8D8D8', // You can change the color as needed
+  },
+  containers: {
+    flex: 1,
+    padding: 20,
+  },
+  checkbox: {
+    alignSelf: 'center',
+  },
+  label: {
+    margin: 8,
+  },
+
 });
 
 export default MainLogin;

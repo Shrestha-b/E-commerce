@@ -12,11 +12,9 @@ import {BackHandler} from 'react-native';
 import Colors from '../themes/Colors';
 import Fonts from '../themes/Fonts';
 import Images from '../themes/Images';
-import {ScreenName} from '../Navigations/ScreenNamesConstant';
-import {isEmpty} from 'lodash';
-import {useNavigation} from '@react-navigation/native';
 
-const DropdownHeader = props => {
+
+const DropdownHeader = ({props}:any) => {
   const {headerTitle, onClickBack, showcart = true, cartCount} = props;
 
   return (
@@ -26,7 +24,7 @@ const DropdownHeader = props => {
           onPress={() => {
             onClickBack();
           }}>
-          <Image style={styles.arrowImg} source={Images.arrow2} />
+          <Image style={styles.arrowImg} source={Images.backarrow} />
         </TouchableOpacity>
         <Text style={styles.headerText}>{headerTitle}</Text>
       </View>

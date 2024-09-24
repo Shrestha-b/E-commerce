@@ -1,176 +1,198 @@
-import React, { useRef } from 'react';
-import { ScrollView, Image, View, Text, StyleSheet, Animated, Dimensions, TouchableOpacity } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
-import { RfH, RfW } from '../../utils/helpers';
+import React, {useRef, useState} from 'react';
+import {
+  ScrollView,
+  SafeAreaView,
+  FlatList,
+  Image,
+  View,
+  Text,
+  StyleSheet,
+  Animated,
+  Dimensions,
+  TouchableOpacity,
+  StatusBar,
+  ImageSourcePropType,
+} from 'react-native';
 import Images from '../../themes/Images';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {RfH, RfW} from '../../utils/helpers';
 
-const { width: windowWidth } = Dimensions.get('window');
+interface SliderItem {
+  id: string;
+  title: string;
+  image: ImageSourcePropType | null; // Define as ImageSourcePropType or null if image is not available
+  subtitle: string;
+  addskip: string | null;
+  arrow: ImageSourcePropType | null;
+}
 
-const HorizontalScrollView = ({navigation}:any) => {
-  const scrollX = useRef(new Animated.Value(0)).current;
+interface SlideProps {
+  item: SliderItem;
+  navigation: any;  // Add navigation to SlideProps interface
+}
 
-  const handleScroll = Animated.event(
-    [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-    { useNativeDriver: false }
-  );
+const sliders: SliderItem[] = [
+  {
+    id: '1',
+    title: 'Welcome to Banjara World',
+    image: Images.fistImg,
+    subtitle: 'Explore our platform ',
+    addskip: 'skip',
+    arrow: null,
+  },
+  {
+    id: '2',
+    title: 'Find Your Banjara Soulmate',
+    image: Images.fistImg, // Since there's no image, you can set this as null
+    subtitle: 'Join Banjara World Matrimony',
+    addskip: 'skip',
+    arrow: Images.backarrow,
+  },
+  {
+    id: '3',
+    title: 'Embrace Banjara',
+    image: Images.thirdImg,
+    subtitle: 'Dive into',
+    addskip: 'skip',
+    arrow: Images.backarrow,
+  },
+];
 
-  const sections = 3; // Number of pages in the ScrollView
-  const dotPosition = Animated.divide(scrollX, windowWidth);
+interface SlideProps {
+  item: SliderItem;
+}
 
+const Slide: React.FC<SlideProps> = ({item, navigation}:any ) => {
   return (
-    <View style={styles.container}>
-      <ScrollView
-        horizontal
-        style={styles.scrollView}
-        onScroll={handleScroll}
-        scrollEventThrottle={16}
-        pagingEnabled
-        contentContainerStyle={styles.contentContainer}
-      >
-        <LinearGradient
-          colors={['#FFFFFF','#FFFFFF', '#FF5069']}
-          style={styles.linearGradient}>
-          <Text style={styles.skipTxt}>skip</Text>
-          <Image style={styles.fistImg} source={Images.fistImg} />
-          <Text style={styles.text}>Welcome to {'\n'} Banjara World</Text>
-          <Text style={styles.text1}>
-            Explore our platform for a seamless {'\n'} experience in Banjara
-            matrimony {'\n'}
-            shopping.
-          </Text>
-        </LinearGradient>
-
-        <LinearGradient
-          colors={['#FFFFFF','#FFFFFF', '#FF5069']}
-          style={styles.linearGradient}>
-          <View style={styles.box}>
-            <Text style={styles.skipTxt}>skip</Text>
-            <Text style={styles.text}>Find Your {'\n'}Banjara Soulmate</Text>
-            <Text style={styles.text1}>
-              Join Banjara World Matrimony to{'\n'} discover meaningful
-              connections{'\n'} rooted in Banjara culture and tradition.
-            </Text>
-          </View>
-        </LinearGradient>
-
-        <LinearGradient
-          colors={['#FFFFFF','#FFFFFF', '#FF5069']}
-          style={styles.linearGradient}>
-          <View style={styles.box}>
-           
-            <View style={{flexDirection:'row', marginTop:-70, }}>
-            <Image source={Images.backarrow2} />
-            <TouchableOpacity onPress={()=>navigation.navigate('mainlogin')}>
-            <Text style={styles.skipTxt}>skip</Text>
-            </TouchableOpacity>
-          
-            </View>
-           
-            <Image style={styles.thirdImg} source={Images.thirdImg} />
-            <Text style={styles.text}> 
-              Embrace Banjara Traditions{'\n'} Through Shopping
-            </Text>
-            <Text style={styles.text1}>
-              Dive into Banjara Shopping for{'\n'} authentic products inspired by
-              Banjara{'\n'} heritage, from textiles to jewelry
-            </Text>
-          </View>
-        </LinearGradient>
-      </ScrollView>
-      <View style={styles.indicatorContainer}>
-        {Array.from({ length: sections }).map((_, index) => {
-          const opacity = dotPosition.interpolate({
-            inputRange: [index - 1, index, index + 1],
-            outputRange: [0.3, 1, 0.3],
-            extrapolate: 'clamp',
-          });
-          return (
-            <Animated.View
-              key={index}
-              style={[styles.dot, { opacity }]}
-              />
-          );
-        })}
+    <View style={{alignItems: 'center'}}>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          width: RfW(335),
+          marginTop: 8,
+        }}>
+        {item.image && (
+          <Image
+            source={item.arrow}
+            style={{height: 24, width: 24, resizeMode: 'contain'}}
+          />
+        )}
+        <TouchableOpacity onPress={() => navigation.navigate('mainlogin')}>
+        <Text style={{fontSize: 14, color:Colors.black, textDecorationLine:'underline'}}>{item.addskip}</Text>
+        </TouchableOpacity>
+      
+      </View>
+      {item.image && (
+        <Image
+          source={item.image}
+          style={{
+            height: '75%',
+            width: Dimensions.get('window').width,
+            resizeMode: 'contain',
+          }}
+        />
+      )}
+       <View style={styles.footerBox}>
+      <Text style={styles.title} numberOfLines={2}>
+        {item.title}
+      </Text>
+      <Text numberOfLines={3} adjustsFontSizeToFit>
+        {item.subtitle}
+      </Text>
       </View>
     </View>
+  );
+};
+
+const HorizontalScrollView: React.FC = ({navigation}:any) => {
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
+  const {height, width} = Dimensions.get('window');
+  const Footer = () => {
+    return (
+      <View
+        style={{
+        height: height * 0.25,
+        justifyContent: 'space-between',
+        paddingHorizontal: 20,
+        backgroundColor: "white",
+      }}>
+        <View
+        style={{
+          flexDirection:'row',
+          justifyContent: 'center',
+          marginTop:80
+        }}>
+          {
+            sliders.map((_,index) =>(
+              <View key={index} style={[styles.indicator,currentSlideIndex == index && {
+                backgroundColor:"#F64775",
+                width:50
+              }]}/>
+            ))
+          }
+        </View>
+      </View>
+    );
+  };
+
+const UpdateCurrentSlideIndex = (e: any) => {
+  const contentOffsetX = e.nativeEvent.contentOffset.x;
+  const currentIndex = Math.round(contentOffsetX / width);
+  setCurrentSlideIndex(currentIndex);
+};
+  return (
+    <SafeAreaView style={styles.container}>
+      <StatusBar backgroundColor={Colors.AppColor} />
+      <FlatList
+      onMomentumScrollEnd={UpdateCurrentSlideIndex}
+        pagingEnabled
+        data={sliders}
+        keyExtractor={item => item.id}
+        contentContainerStyle={{height: height * 0.75}}
+        horizontal
+        showsVerticalScrollIndicator={false}
+        renderItem={({item}) => <Slide item={item} navigation={navigation}/>}
+      />
+      <Footer />
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // marginLeft: -6
+    backgroundColor: Colors.AppColor,
   },
-  scrollView: {
-    flexDirection: 'row',
-  },
-  contentContainer: {
-    paddingHorizontal: 10,
-  },
-  skipTxt: {
-    fontWeight: '500',
-    fontSize: 14,
-    marginLeft: 306,
-    marginBottom: 60,
-  },
-  box: {
-    height: RfH(780),
-    width: RfW(500),
-    justifyContent: 'center',
-    alignItems: 'center',
+  title: {
+    color: Colors.black,
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginTop: 20,
     textAlign: 'center',
+    paddingHorizontal: 10, // Add horizontal padding to limit width
   },
-  linearGradient: {
-    flex: 1,
-    // width: windowWidth,
-    width: RfW(375),
-    // margin: 10,
-    // justifyContent: 'center',
-    alignItems: 'center',
-  },
-  fistImg: {
-    height: RfW(403),
-    width: RfW(375),
-    marginRight: 20,
-    marginBottom: 100
-
-  },
-  thirdImg: {
-    height: RfH(400),
-    width: RfW(375),
-    marginRight: 20,
-    resizeMode: 'cover',
-  },
-  text1: {
+  subtitle: {
+    fontSize: 16,
     textAlign: 'center',
-    fontSize: 15,
-    color: 'black',
-    marginTop: 30,
+    marginTop: 5,
+    color: 'gray',
+    paddingHorizontal: 10, // Add horizontal padding to limit width
+    flexShrink: 1,
   },
-  text: {
-    color: 'black',
-    paddingTop: 60,
-    fontSize: 24,
-    fontWeight: '600',
-    textAlign: 'center',
+  indicator:{
+    height:5,
+    width:30,
+    backgroundColor: Colors.White,
+    marginHorizontal:3,
+    borderRadius: 10,
   },
-  indicatorContainer: {
-    position: 'absolute',
-    bottom: 40,
-    left: 0,
-    right: 0,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  dot: {
-    height: RfH(10),
-    width: RfW(10),
-    borderRadius: 5,
-    backgroundColor: '#F64775', // Change this to your desired color
-    marginHorizontal: 8,
-    marginBottom: 30
-  },
+  footerBox:{
+    justifyContent:'center',
+    flex:1,
+    height:RfH(234),
+    width:RfW(278)
+  }
 });
 
 export default HorizontalScrollView;

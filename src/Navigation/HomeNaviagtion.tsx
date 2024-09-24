@@ -26,6 +26,7 @@ import CartHeader from '../redux/CartHearder';
 import Combo from '../redux/Combo';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import StoreData from '../AsyncStorage.tsx/StoreData';
+import CountryPickers from '../comonents/CountryPickers';
 
 
 // Define the param list for type safety
@@ -53,6 +54,8 @@ type StackParamList = {
   Combo: undefined;
   ShopAPI: undefined;
   StoreData: undefined;
+  // DropdownHeader: undefined;  // Ensure this matches the name you're using
+  CountryPickers: any
 };
 
 const Stack = createNativeStackNavigator<StackParamList>();
@@ -62,7 +65,7 @@ function HomeNavigation() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
-        <Stack.Screen name="mainlogin" component={MainLogin} />
+        <Stack.Screen name="mainlogin" component={MainLogin} options={{ headerShown: false }}/>
         <Stack.Screen name="horizontalscrollView" component={HorizontalScrollView} options={{ headerShown: false }} />
         <Stack.Screen name="explorematrimony" component={ExploreMatrimony} options={{ headerShown: false }} />
         <Stack.Screen name="newepl" component={NewEpl} options={{ headerShown: false }} />
@@ -84,7 +87,11 @@ function HomeNavigation() {
         <Stack.Screen name="Combo" component={Combo} options={{ headerShown: false }} />
         <Stack.Screen name="ShopAPI" component={ShopAPI} options={{ headerShown: false }} />
         <Stack.Screen name="StoreData" component={StoreData} options={{ headerShown: false }} />
+        {/* <Stack.Screen name="dropdownHeader" component={DropdownHeader} options={{ headerShown: false }} /> */}
+        <Stack.Screen name="countrypickers" component={CountryPickers} options={{ headerShown: false }} />
+
       </Stack.Navigator>
+
     </NavigationContainer>
   );
 }
