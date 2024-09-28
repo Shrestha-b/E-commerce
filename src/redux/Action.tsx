@@ -5,5 +5,9 @@ export const addToCart = (item: any) => ({
 });
 export const removeToCart  = (Item :any) => ({
     type: 'REMOVE_TO_CART',
-    payload:Item
+    payload: Item
+})
+export const AddUserName  = (Item :any) => ({
+    type: 'ADD_USER_NAME',
+    item: Item
 })

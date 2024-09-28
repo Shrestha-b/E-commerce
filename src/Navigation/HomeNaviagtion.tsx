@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -20,13 +19,12 @@ import UploadPhoto from '../Explore/UploadPhoto';
 import MyProfile from '../Propfile/Myprofile';
 import MatrimonyProfile from '../Matrimony/MatrimonyProfile';
 import Clothapi from '../ApiIntrigation/clothapi';
-import ShopAPI from '../ApiIntrigation/ShopAP';
 import Products from '../redux/Products';
 import CartHeader from '../redux/CartHearder';
 import Combo from '../redux/Combo';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import StoreData from '../AsyncStorage.tsx/StoreData';
-import CountryPickers from '../comonents/CountryPickers';
+import ShoppingProduct from '../ApiIntrigation/ShoppingProduct';
+import CartDetails from '../cart.tsx/CartDetails';
 
 
 // Define the param list for type safety
@@ -52,10 +50,10 @@ type StackParamList = {
   Products: any;
   CartHeader: undefined;
   Combo: undefined;
-  ShopAPI: undefined;
+  shoppingproduct: undefined;
   StoreData: undefined;
+  cartdetails: undefined
   // DropdownHeader: undefined;  // Ensure this matches the name you're using
-  CountryPickers: any
 };
 
 const Stack = createNativeStackNavigator<StackParamList>();
@@ -85,10 +83,10 @@ function HomeNavigation() {
         <Stack.Screen name="Products" component={Products} options={{ headerShown: false }} />
         <Stack.Screen name="CartHeader" component={CartHeader} options={{ headerShown: false }} />
         <Stack.Screen name="Combo" component={Combo} options={{ headerShown: false }} />
-        <Stack.Screen name="ShopAPI" component={ShopAPI} options={{ headerShown: false }} />
+        <Stack.Screen name="shoppingproduct" component={ShoppingProduct} options={{ headerShown: false }} />
         <Stack.Screen name="StoreData" component={StoreData} options={{ headerShown: false }} />
         {/* <Stack.Screen name="dropdownHeader" component={DropdownHeader} options={{ headerShown: false }} /> */}
-        <Stack.Screen name="countrypickers" component={CountryPickers} options={{ headerShown: false }} />
+        <Stack.Screen name="cartdetails" component={CartDetails} options={{ headerShown: false }} />
 
       </Stack.Navigator>
 

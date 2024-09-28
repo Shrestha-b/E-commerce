@@ -162,7 +162,7 @@ const UpdateCurrentSlideIndex = (e: any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.AppColor,
+    backgroundColor: 'white',
   },
   title: {
     color: Colors.black,

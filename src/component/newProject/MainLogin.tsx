@@ -1,24 +1,22 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   View,
   TextInput,
   Text,
   Image,
-  Modal,
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import LinearGradient from 'react-native-linear-gradient';
-import Images from '../../themes/Images';
 import { RfH, RfW, responsiveFontSize } from '../../utils/helpers';
 import Fonts from '../../themes/Fonts';
 import PhoneInput from 'react-native-phone-number-input';
-import { Checkbox } from 'react-native-paper';
 
 typeinferance:{}
 const MainLogin:React.FC  = ({navigation}:any) => {
   const [isSelected, setSelection] = useState(false);
+  const phoneInput = useRef<PhoneInput>(null);
+
   return (
     <View style={styles.container}>
       <View style={styles.mainFlex}>
@@ -32,9 +30,9 @@ const MainLogin:React.FC  = ({navigation}:any) => {
               keyboardType="numeric"
               style={styles.inputStyle}
             />
-        <View style={{height:70}}>
+        <View>
         <PhoneInput
-            // ref={phoneInput}
+            ref={phoneInput}
             // defaultValue={value}
             defaultCode="DM"
             layout="first"
@@ -55,7 +53,6 @@ const MainLogin:React.FC  = ({navigation}:any) => {
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('horverificationnew')}>
           <Text style={styles.continue}>Continue</Text>
         </TouchableOpacity>
-        {/* <CountryPickers/> */}
       </View>
     </View>
   );
@@ -66,7 +63,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor:'white'
   },
   input: {
     height: 56,

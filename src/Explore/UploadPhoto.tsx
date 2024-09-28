@@ -96,7 +96,7 @@ const AiHade = ({navigation}: any) => {
         </View>
       </View>
         <View>
-          <TouchableOpacity style={styles.button} onPress={() => {}}>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('profile')}>
             <Text style={styles.btnText}>Continue</Text>
           </TouchableOpacity>
         </View>

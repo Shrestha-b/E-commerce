@@ -1,5 +1,6 @@
 const initialState = {
-    cartItems: []  // Initialize as an array
+    cartItems: [],
+    userdata: [] // Initialize as an array
 };
 
 const cartReducer = (state = initialState, action: any) => {
@@ -16,6 +17,11 @@ const cartReducer = (state = initialState, action: any) => {
                 (Item:any) => Item.id !== action.payload
             ),
         };  
+        case 'ADD_USER_NAME':
+        return {
+            ...state,
+            userdata: [...state.userdata, action.item]
+        }
         default:
             return state;
     }

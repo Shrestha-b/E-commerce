@@ -5,10 +5,11 @@ import { responsiveFontSize, RfH, RfW } from '../utils/helpers';
 import Images from '../themes/Images';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import Fonts from '../themes/Fonts';
+import Head from '../Header/Head';
 const NewEpl = ({navigation}:any) => {
   return (
     <View>
-      <HomeScreen />
+      <Head />
         <View style={styles.container}>
             <View style={styles.RegisterTxt}>
             <Text style={{marginTop: 25,fontSize:14,fontWeight:'500',position:'absolute'}}>Register to Explore</Text>
@@ -35,7 +36,7 @@ const NewEpl = ({navigation}:any) => {
 
 const styles = StyleSheet.create({
       container:{
-        marginTop: 231,
+        marginTop: 180,
         borderTopLeftRadius: 40,
         borderTopRightRadius: 40,
         backgroundColor: Colors.white,
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems:'center',
       gap: 15,
-      marginTop:311
+      marginTop:250
     },
     button: {
       borderRadius: 10,

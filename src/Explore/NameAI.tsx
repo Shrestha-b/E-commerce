@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Image,
@@ -8,21 +8,31 @@ import {
   StyleSheet,
 } from 'react-native';
 import Images from '../themes/Images';
-import {RfH, RfW} from '../utils/helpers';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import { RfH, RfW } from '../utils/helpers';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 import Fonts from '../themes/Fonts';
-import {responsiveFontSize} from '../utils/helpers';
+import { responsiveFontSize } from '../utils/helpers';
+import { useDispatch } from 'react-redux';
+import { AddUserName } from '../redux/Action';
 
-// create a component
-const NameAI = ({navigation}:any) => {
+const NameAI = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
-      <AiHade navigation={navigation}/>
+      <AiHade navigation={navigation} />
     </View>
   );
 };
 
-const AiHade = ({navigation}:any) => {
+const AiHade = ({ navigation }: any) => {
+  const [text, setOnChangeText] = useState<string>(''); // State to handle the name input
+  const dispatch = useDispatch(); // Moved the useDispatch hook inside the component
+
+  const handleAddToCart = () => {
+    dispatch(AddUserName(text)); // Dispatch the name to Redux
+    navigation.navigate('emailaddress'); // Navigate to the next screen
+  };
+
+
   return (
     <View style={styles.aiHadeContainer}>
       <View style={styles.row}>
@@ -35,18 +45,19 @@ const AiHade = ({navigation}:any) => {
           </View>
         </View>
       </View>
-      <Text style={styles.name}>What’s Your Name?</Text>
+      <Text style={styles.name}>What’s Your Name? {text}</Text>
       <Text style={styles.subText}>We'll need your email to stay in touch</Text>
 
       <View style={styles.txtbtn}>
         <TextInput
           style={styles.textInput}
+          onChangeText={setOnChangeText} // Set the input to state
+          value={text}
           placeholder="Enter Your Name"
           placeholderTextColor="#000" // Placeholder text color
-        ></TextInput>
-
+        />
         <View>
-          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('emailaddress')}>
+          <TouchableOpacity style={styles.button} onPress={handleAddToCart}>
             <Text style={styles.btnText}>Continue</Text>
           </TouchableOpacity>
         </View>
@@ -55,7 +66,7 @@ const AiHade = ({navigation}:any) => {
   );
 };
 
-// define your styles
+// Define styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -114,11 +125,9 @@ const styles = StyleSheet.create({
   },
   txtbtn: {
     flex: 1,
-    // justifyContent: 'space-between',
     height: RfH(569),
     width: RfW(300),
-    marginTop: 41
-    
+    marginTop: 41,
   },
   textInput: {
     height: 48,
@@ -126,12 +135,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     borderRadius: 50,
     justifyContent: 'center',
-    // padding: 10
     padding: 10,
-    // borderColor: '#000', // Optional: Border color if needed
-    // borderWidth: 1,      // Optional: Border width if needed
-    // borderRadius: 5,     // Optional: Border radius if needed
-    // paddingLeft: 10,
   },
   button: {
     borderRadius: 10,
@@ -150,5 +154,4 @@ const styles = StyleSheet.create({
   },
 });
 
-//make this component available to the app
 export default NameAI;

@@ -13,6 +13,7 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Fonts from '../themes/Fonts';
 import {responsiveFontSize} from '../utils/helpers';
 import { Picker } from 'react-native-wheel-pick';
+import { blue } from 'react-native-reanimated/lib/typescript/reanimated2/Colors';
 
 // create a component
 const Age = ({navigation}:any) => {
@@ -172,7 +173,6 @@ const styles = StyleSheet.create({
   picker: {
     width: RfW(100),
     height: RfH(377),
-    
   },
   pickerline:{
     height: 1, // Line height

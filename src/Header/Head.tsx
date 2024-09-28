@@ -6,10 +6,12 @@ import { Colors } from "react-native/Libraries/NewAppScreen";
 const Head = () => {
     return(
       <View style={styles.header}>
+
       <View style={{flexDirection:'row', gap: 10}}>
       <Image style={{height:40,width:40}} source={Images.profile} />
-     <Text style={{marginTop:10,color:'black',fontWeight:'600',fontSize:14}}>Hii Alia</Text>
-     </View>
+      <Text style={{marginTop:10,color:'black',fontWeight:'600',fontSize:14}}>Hii Alia</Text>
+      </View>
+
      <View style={{flexDirection:'row', gap: 10, marginTop:10}}>
      <Image style={{height:18,width:18}} source={Images.bell} />
      <Image  style={{height:18,width:18}} source={Images.menu} />

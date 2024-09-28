@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, {useRef, useState} from 'react';
 import {
   Animated,
   Image,
@@ -11,30 +11,30 @@ import {
   View,
 } from 'react-native';
 import Images from '../themes/Images';
-import { RfH, RfW, responsiveFontSize } from '../utils/helpers';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import {RfH, RfW, responsiveFontSize} from '../utils/helpers';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Fonts from '../themes/Fonts';
 import MyTabs from '../Navigation/BotomTabNavigation';
 import Head from '../Header/Head';
 import Clothapi from '../ApiIntrigation/clothapi';
 import HeightPicker from '../Matrimony/WheelPicker';
-import { black } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
+import {black} from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
 
-const HomeScreen = ({navigation}:any) => {
+const HomeScreen = ({navigation}: any) => {
   return (
     <View style={styles.container}>
       <Head />
-      <HorizontalScrollView navigation={navigation} />
+      <HomeScroll navigation={navigation} />
       {/* <MyTabs /> */}
     </View>
   );
 };
 
-const HorizontalScrollView = ({navigation}:any) => {
+const HomeScroll = ({navigation}: any) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
 
-  const handleScroll = (event:any) => {
+  const handleScroll = (event: any) => {
     const contentOffsetX = event.nativeEvent.contentOffset.x;
     const index = Math.floor(contentOffsetX / 335); // Assuming the width of each item is 335
     setActiveIndex(index);
@@ -42,86 +42,104 @@ const HorizontalScrollView = ({navigation}:any) => {
 
   return (
     <View style={styles.maincontainer}>
-    <Animated.ScrollView
-      horizontal
-      // style={styles.scrollView}
-      showsHorizontalScrollIndicator={false}
-      scrollEventThrottle={16}
-      onScroll={Animated.event(
-        [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-        { useNativeDriver: false, listener: handleScroll }
-      )}
-    >
-      <View style={styles.box}>
-        <ImageBackground
-          source={Images.SliderImg}
-          style={styles.backgroundImage}
-        >
-          <View style={styles.overlay}>
-            <Text style={styles.text}>“Find Your Perfect Match”</Text>
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('explorematrimony')}>
-              <Text style={styles.btnText}>Explore Matrimony</Text>
-            </TouchableOpacity>
-            <View style={styles.dotContainer}>
-              <View style={[styles.dot, activeIndex === 0 && styles.activeDot]} />
-              <View style={[styles.dot, activeIndex === 1 && styles.activeDot]} />
-              <View style={[styles.dot, activeIndex === 2 && styles.activeDot]} />
+      <Animated.ScrollView
+      pagingEnabled
+        horizontal
+        // style={styles.scrollView}
+        showsHorizontalScrollIndicator={false}
+        scrollEventThrottle={16}
+        onScroll={Animated.event(
+          [{nativeEvent: {contentOffset: {x: scrollX}}}],
+          {useNativeDriver: false, listener: handleScroll},
+        )}>
+        <View style={styles.box}>
+          <ImageBackground
+            source={Images.SliderImg}
+            style={styles.backgroundImage}>
+            <View style={styles.overlay}>
+              <Text style={styles.text}>“Find Your Perfect Match”</Text>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.navigate('explorematrimony')}>
+                <Text style={styles.btnText}>Explore Matrimony</Text>
+              </TouchableOpacity>
+              <View style={styles.dotContainer}>
+                <View
+                  style={[styles.dot, activeIndex === 0 && styles.activeDot]}
+                />
+                <View
+                  style={[styles.dot, activeIndex === 1 && styles.activeDot]}
+                />
+                <View
+                  style={[styles.dot, activeIndex === 2 && styles.activeDot]}
+                />
+              </View>
             </View>
-          </View>
-        </ImageBackground>
+          </ImageBackground>
+        </View>
+
+        <View style={styles.box}>
+          <ImageBackground
+            source={Images.SliderImg}
+            style={styles.backgroundImage}>
+            <View style={styles.overlay}>
+              <Text style={styles.text}>Box 2</Text>
+              <View style={styles.dotContainer}>
+                <View
+                  style={[styles.dot, activeIndex === 0 && styles.activeDot]}
+                />
+                <View
+                  style={[styles.dot, activeIndex === 1 && styles.activeDot]}
+                />
+                <View
+                  style={[styles.dot, activeIndex === 2 && styles.activeDot]}
+                />
+              </View>
+            </View>
+          </ImageBackground>
+        </View>
+
+        <View style={styles.box}>
+          <ImageBackground
+            source={Images.SliderImg}
+            style={styles.backgroundImage}>
+            <View style={styles.overlay}>
+              <Text style={styles.text}>Box 3</Text>
+              <View style={styles.dotContainer}>
+                <View
+                  style={[styles.dot, activeIndex === 0 && styles.activeDot]}
+                />
+                <View
+                  style={[styles.dot, activeIndex === 1 && styles.activeDot]}
+                />
+                <View
+                  style={[styles.dot, activeIndex === 2 && styles.activeDot]}
+                />
+              </View>
+            </View>
+          </ImageBackground>
+        </View>
+      </Animated.ScrollView>
+
+      <View style={styles.productHeader}>
+        <View style={{flexDirection:'row', alignItems:'center', height:17.5,width:145, justifyContent:'space-between'}}>
+        <Image source={Images.shopbag} style={{height: 17.25, width: 17.25}} />
+        <Text style={{color: 'black'}}>Shop</Text>
+        <Image
+          style={{height: 10, width: 10,marginTop:3}}
+          source={Images.rightarrow}></Image>
+        <View>
+          <Text style={styles.Trending}>Trending Now</Text>
+        </View>
+        </View>
+        <View>
+          <Image source={Images.circlearrow} style={styles.circlearrow} />
+        </View>
       </View>
 
-      <View style={styles.box}>
-        <ImageBackground
-          source={Images.SliderImg}
-          style={styles.backgroundImage}
-        >
-          <View style={styles.overlay}>
-            <Text style={styles.text}>Box 2</Text>
-            <View style={styles.dotContainer}>
-              <View style={[styles.dot, activeIndex === 0 && styles.activeDot]} />
-              <View style={[styles.dot, activeIndex === 1 && styles.activeDot]} />
-              <View style={[styles.dot, activeIndex === 2 && styles.activeDot]} />
-            </View>
-          </View>
-        </ImageBackground>
-      </View>
-      <View style={styles.box}>
-        <ImageBackground
-          source={Images.SliderImg}
-          style={styles.backgroundImage}
-        >
-          <View style={styles.overlay}>
-            <Text style={styles.text}>Box 3</Text>
-            <View style={styles.dotContainer}>
-              <View style={[styles.dot, activeIndex === 0 && styles.activeDot]} />
-              <View style={[styles.dot, activeIndex === 1 && styles.activeDot]} />
-              <View style={[styles.dot, activeIndex === 2 && styles.activeDot]} />
-            </View>
-          </View>
-        </ImageBackground>
-        {/* <View style={styles.containers}>
-        <MyTabs />
-         </View> */}
-      </View>
-    </Animated.ScrollView>
-    <View style={{flexDirection:'row', gap:200}}>
-  <View style={styles.productHeader}>
-    <Image source={Images.shopbag} style={{height: 17.25, width:17.25}}/>
-      <Text style={{color:'black'}}>Shop</Text>
-      <Image style={{height: 10, width:10}} source={Images.rightarrow}></Image>
-      <Text style={styles.Trending}>Trending Now</Text>
-      <Image style={{height:20, width:20}} source={Images.rightarrow}></Image>
-  </View>
-  <View>
-    <Image source={Images.circlearrow} style={styles.circlearrow}/>
-  </View>
-  </View>
-
-    <Clothapi />
-    <Image style={styles.footerImg} source={Images.footerImg}/>
-    
-  </View>
+      <Clothapi />
+      <Image style={styles.footerImg} source={Images.footerImg} />
+    </View>
   );
 };
 //explorematrimony
@@ -130,10 +148,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  maincontainer:{
-  flex:1,
-  width: RfW(335),
-  marginLeft:20
+  maincontainer: {
+    flex: 1,
+    width: RfW(335),
+    marginLeft: 20,
   },
   // scrollView: {
   //   margin: 20,
@@ -143,11 +161,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  productHeader:{
-    flexDirection:'row',
-    gap:4,
-    width: RfW(145),
-    marginBottom: 20
+  productHeader: {
+    flexDirection: 'row',
+    gap: 4,
+    width: RfW(335),
+    marginBottom: 20,
+    justifyContent:'space-between',
+    alignItems:'center'
   },
   box: {
     width: RfW(335),
@@ -208,19 +228,18 @@ const styles = StyleSheet.create({
   activeDot: {
     backgroundColor: '#FF5069',
   },
-  Trending:{
+  Trending: {
     color: '#F64775',
-    fontWeight:'500',
-    fontSize: 12
+    fontWeight: '500',
+    fontSize: 12,
   },
-  footerImg:{
+  footerImg: {
     height: 162,
-    width: RfW(335)
-
+    width: RfW(335),
   },
-  circlearrow:{
+  circlearrow: {
     height: RfH(18),
-    width: RfW(18)
-  }
+    width: RfW(18),
+  },
 });
-export default HomeScreen
+export default HomeScreen;
