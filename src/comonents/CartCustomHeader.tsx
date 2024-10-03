@@ -1,15 +1,18 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text,Image, StyleSheet } from 'react-native';
+import { View, Text,Image,TouchableOpacity, StyleSheet } from 'react-native';
 import Images from '../themes/Images';
 import { RfH, RfW } from '../utils/helpers';
 
 // create a component
-const CustomCartHeader = () => {
+const CustomCartHeader = ({navigation}:any) => {
     return (
         <View style={styles.container}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
             <Image source={Images.backarrow} style={{height:24, width:24}}></Image>
+            </TouchableOpacity>
             <Image source={Images.heart} style={{height:20, width:20}}></Image>
+           
         </View>
     );
 };

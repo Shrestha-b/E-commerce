@@ -54,7 +54,7 @@ const AiHade = ({navigation}:any) => {
 
       <View style={styles.TXTStyle}>
 
-      <Text style={styles.name}>How old are you?</Text>
+      <Text style={styles.name}>How old are you?{selectedHeight}</Text>
       <Text style={styles.subText}>Please provide your age in years</Text>
 
       </View>

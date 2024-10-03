@@ -4,15 +4,30 @@ import { RfH, RfW } from '../utils/helpers';
 import Images from '../themes/Images';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { launchCamera, launchImageLibrary, ImagePickerResponse, Asset } from 'react-native-image-picker';
-import { useSelector } from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 interface ImagePickerResult extends ImagePickerResponse {
   assets?: Asset[];
 }
 const MyProfile = () => {
-  const [imgUrl, setImgUrl] = useState<string>('https://source.unsplash.com/random/400x300');
+  const [imgUrl, setImgUrl] = useState('https://source.unsplash.com/random/400x300');
 //   const userdata = useSelector((state: any) => state.user);
 
+
+interface MyComponentProps {
+  imagUrl: string;
+}
+
+const storeData = async (key: string, value: MyComponentProps) => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem(key, jsonValue);
+    console.log('Data stored successfully');
+  } catch (error) {
+    console.error('Error storing data:', error);
+  }
+};
   // Function to open the camera and handle image picking
   const openCamera = async () => {
     console.log('Camera Pressed');
@@ -42,13 +57,19 @@ const MyProfile = () => {
     }
   };
 
-
+// const storeData = async () => {
+//   try {
+//     await AsyncStorage.setItem();
+//   } catch (error) {
+//     // Error saving data
+//   }
+// };
   return (
     <View style={styles.container}>
       <View style={styles.headercontainer}>
         <View style={styles.headerstyle}>
-          <Image style={styles.headerImg} source={Images.menu} />
-          <Image style={styles.headerImg} source={Images.bell} />
+          <Image style={styles.headerImg} source={Images.menuIcon} />
+          <Image style={styles.headerImg} source={Images.NotificationBell} />
         </View>
       </View>
       <View style={styles.profile}>
@@ -84,15 +105,15 @@ const styles = StyleSheet.create({
   },
   headerstyle: {
     marginTop: 10,
-    height: 18,
-    width: 335,
+    height: RfH(18),
+    width: RfW(335),
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignSelf: 'center',
   },
   headerImg: {
-    width: 18,
-    height: 18,
+    width: 28,
+    height: 28,
   },
   profile: {
     height: RfH(184),

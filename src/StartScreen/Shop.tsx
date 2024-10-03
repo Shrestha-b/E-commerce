@@ -129,7 +129,7 @@ const Shop: React.FC<ShopProps> = ({navigation}:any) => {
   };
 
   const Item = ({item}: {item: DataItem}) => (
-    <TouchableOpacity onPress={() => {}} style={styles.itemContainer}>
+    <TouchableOpacity onPress={()=> navigation.navigate('imojislist')} style={styles.itemContainer}>
       <Image source={item.image} style={styles.imageStyle} />
       <Text style={styles.itemText}>{item.name}</Text>
     </TouchableOpacity>
@@ -161,9 +161,9 @@ const Shop: React.FC<ShopProps> = ({navigation}:any) => {
       />
      
       </View>
-      <View style={{height: RfH(402), flexDirection: 'row', marginBottom: 80}}>
+      <View style={{height: RfH(402), marginBottom: 80, flexDirection:'row'}}>
         <Api/>
-        <Api />
+        <Api/>
       </View>
     </View>
   );
@@ -280,6 +280,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     width: RfW(160),
     height: RfW(194),
+    flexDirection:'row',
+    flexWrap : 'wrap'
   },
   heartIcon: {
     height: 20,

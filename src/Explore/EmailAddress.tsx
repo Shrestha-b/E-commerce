@@ -26,7 +26,7 @@ const AiHade = ({navigation}:any) => {
   return (
     <View style={styles.aiHadeContainer}>
       <View style={styles.row}>
-        <TouchableOpacity style={styles.touchableOpacity} onPress={() => navigation.goBack()}>
+        <TouchableOpacity style={styles.touchableOpacity} onPress={() => navigation.navigate.goBack()}>
           <Image style={styles.backarrow} source={Images.backarrow} />
         </TouchableOpacity>
         <View style={styles.containers}>

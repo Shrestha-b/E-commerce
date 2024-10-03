@@ -45,7 +45,7 @@ const AiHade = ({ navigation }: any) => {
           </View>
         </View>
       </View>
-      <Text style={styles.name}>What’s Your Name? {text}</Text>
+      <Text style={styles.name}>What’s Your Name?</Text>
       <Text style={styles.subText}>We'll need your email to stay in touch</Text>
 
       <View style={styles.txtbtn}>

@@ -13,8 +13,8 @@ const Head = () => {
       </View>
 
      <View style={{flexDirection:'row', gap: 10, marginTop:10}}>
-     <Image style={{height:18,width:18}} source={Images.bell} />
-     <Image  style={{height:18,width:18}} source={Images.menu} />
+     <Image style={{height:25,width:25}} source={Images.NotificationBell} />
+     <Image  style={{height:25,width:25}} source={Images.menuIcon} />
      </View>
      </View>
     )

@@ -33,8 +33,12 @@ const Images = {
   circlearrow: require("../assest/Imageses/circlearrow.png"),
   backarrow2: require("../assest/Imageses/backarrow2.png"),
   banjaraworld: require("../assest/Imageses/banjaraworld.png"),
-  heart: require("../assest/Imageses/heardImg.png"),
-  heartFilled: require("../assest/Imageses/fillheart.png")
+  heart: require("../assest/Imageses/heardImg.jpg"),
+  heartFilled: require("../assest/Imageses/fillheart.jpg"),
+  SmileEmoji: require("../assest/Imageses/SmileEmoji.png"),
+  NotificationBell: require("../assest/Imageses/notificationbell.png"),
+  menuIcon: require("../assest/Imageses/menuimg.png"),
+
 };
 export default Images;
  

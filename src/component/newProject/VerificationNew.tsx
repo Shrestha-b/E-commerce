@@ -1,5 +1,4 @@
 import {
-  Alert,
   Image,
   StyleSheet,
   Text,
@@ -12,99 +11,112 @@ import {RfH, RfW, responsiveFontSize} from '../../utils/helpers';
 import Colors from '../../themes/Colors';
 import Fonts from '../../themes/Fonts';
 import Images from '../../themes/Images';
-import LinearGradient from 'react-native-linear-gradient';
 
 const AuthVerify = ({navigation, route}: {route: any; navigation: any}) => {
+  const numInputs = 4; // Number of OTP input fields
+  const [otp, setOtp] = useState<string[]>(Array(numInputs).fill(''));
+  const inputs = useRef<TextInput[]>([]);
 
+  const handleChange = (text: string, index: number) => {
+    const newOtp = [...otp];
+    newOtp[index] = text;
+    setOtp(newOtp);
+
+    // Move to next input if a value is entered
+    if (text.length > 0 && index < numInputs - 1) {
+      inputs.current[index + 1]?.focus();
+    }
+
+    // Optionally, move to the previous input if the current input is cleared
+    if (text.length === 0 && index > 0) {
+      inputs.current[index - 1]?.focus();
+    }
+  };
   return (
-      <LinearGradient colors={['#FFFF', 'pink', Colors.appcolor]} style={styles.container}>
-        <View style={{justifyContent: 'center', alignItems: 'center'}}>
+    <View style={styles.container}>
+      <View
+        style={{
+          height: RfH(330),
+          width: 325,
+          backgroundColor: Colors.white,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <View
+          style={{
+            justifyContent: 'center',
+            flex: 1,
+            alignItems: 'center',
+            height: RfH(29),
+            width: RfW(266),
+          }}>
           <Text style={styles.titleStyle}>Verification Code</Text>
-            <Text style={styles.txtstyle2}>Please enter code we just send to</Text>
         </View>
         <View
           style={{
             justifyContent: 'center',
             alignItems: 'center',
-            flexDirection: 'row',
+            height: RfH(45),
+            width: RfW(224),
+            flex: 1,
           }}>
-          <Text style={styles.txtstyle3}>+91 99292 77633</Text>
-          <Image source={Images.pen} />
+          <Text style={styles.txtstyle2}>
+            Please enter code we just send to
+          </Text>
+          <Text style={styles.txtstyle3}>
+            +91 99292 77633 <Image source={Images.pen} />
+          </Text>
         </View>
-      <View style={styles.otpContainer}>
+        <View style={styles.otpContainer}>
+          {otp.map((value, index) => (
             <TextInput
-              // key={index}
-              // ref={el => (inputs.current[index] = el)}
+              key={index}
+              ref={(el:any) => (inputs.current[index] = el)}
               style={styles.otpInput}
               keyboardType="numeric"
               maxLength={1}
-              // onChangeText={text => handleChange(text, index)}
-              // value={value}
+              placeholder="-"
+              onChangeText={text => handleChange(text, index)}
+              value={value}
             />
-             <TextInput
-              // key={index}
-              // ref={el => (inputs.current[index] = el)}
-              style={styles.otpInput}
-              keyboardType="numeric"
-              maxLength={1}
-              // onChangeText={text => handleChange(text, index)}
-              // value={value}
-            />
-            <TextInput
-              // key={index}
-              // ref={el => (inputs.current[index] = el)}
-              style={styles.otpInput}
-              keyboardType="numeric"
-              maxLength={1}
-              // onChangeText={text => handleChange(text, index)}
-              // value={value}
-            />
-            <TextInput
-              // key={index}
-              // ref={el => (inputs.current[index] = el)}
-              style={styles.otpInput}
-              keyboardType="numeric"
-              maxLength={1}
-              // onChangeText={text => handleChange(text, index)}
-              // value={value}
-            />
+          ))}
         </View>
 
-        <View style={{marginTop: RfH(30)}}>
-          <TouchableOpacity onPress={()=>navigation.navigate('mytabs')}>
+        <View style={{flex: 1}}>
+          <TouchableOpacity onPress={() => navigation.navigate('mytabs')}>
             <View style={styles.button}>
               <Text style={styles.btnText}>Verify</Text>
             </View>
           </TouchableOpacity>
-            <View style={{marginVertical: RfH(20),flexDirection:'row'}}>
-            <Text>Didn’t receive OTP?</Text>
+
+          <View style={{marginVertical: RfH(20), flexDirection: 'row'}}>
+            <Text
+              style={{color: Colors.black, fontSize: 14, fontWeight: '400'}}>
+              Didn’t receive OTP?
+            </Text>
+          </View>
         </View>
-        </View>
-      </LinearGradient>
+
+      </View>
+    </View>
   );
 };
 
 const styles: any = StyleSheet.create({
-  // -----------------------css for new otp
-
   otpContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    width: '80%'
+    width: '80%',
+    flex: 1,
   },
   otpInput: {
-    // borderBottomWidth: ,
-    // borderColor: Colors.tooLightGreen,
-    backgroundColor: Colors.white,
-    fontSize: responsiveFontSize(24),
+    borderBottomWidth: 1,
+    borderColor: 'gray',
     textAlign: 'center',
-    height:56,
-    width:56,
-    borderRadius: 10
+    width: 40,
+    fontSize: 20,
+    fontWeight:'500'
   },
-
-  // ------------------------
-
   imageSize12: {
     width: 25,
     height: 25,
@@ -121,11 +133,8 @@ const styles: any = StyleSheet.create({
     marginBottom: RfH(20),
     fontFamily: Fonts.UextraBold,
     marginTop: 5,
-    marginRight:5,
-    // fontWeight: '900',
-    color: Colors.black,
-    // textShadowColor: Colors.textShadow, // Shadow color
-    // textShadowOffset: {width: 1, height: 1}, // Shadow offset
+    marginRight: 5,
+    color: 'black',
     textShadowRadius: 2,
   },
   nameInput: {
@@ -138,10 +147,10 @@ const styles: any = StyleSheet.create({
     fontFamily: Fonts.UfontBold,
     color: Colors.black,
   },
-  resend:{
+  resend: {
     fontSize: 14,
-    fontWeight:'600',
-    color: Colors.black
+    fontWeight: '600',
+    color: Colors.black,
   },
   input: {
     height: 40,
@@ -150,38 +159,25 @@ const styles: any = StyleSheet.create({
     marginBottom: RfH(20),
     paddingLeft: RfW(8),
   },
-  infoText: {
-    color: Colors.black,
-    fontFamily: Fonts.UfontMedium,
-    fontSize: responsiveFontSize(14),
-    textShadowColor: Colors.black, // Shadow color
-    textShadowOffset: {width: 0.5, height: 0.5}, // Shadow offset
-    textShadowRadius: 1,
-  },
   btnText: {
     color: Colors.white,
     fontSize: responsiveFontSize(18),
     fontFamily: Fonts.UextraBold,
-    fontWeight:'600',
-
+    fontWeight: '600',
   },
   button: {
-    // borderWidth: 1,
     borderRadius: 10,
-    // paddingVertical: RfH(15),
-    // paddingHorizontal: RfW(150),
-    height:56,
+    height: 56,
     width: 325,
     alignItems: 'center',
-    justifyContent:'center',
+    justifyContent: 'center',
     backgroundColor: Colors.appcolor,
-    // marginTop: RfH(30),
   },
   container: {
     flex: 1,
     backgroundColor: Colors.white,
-    justifyContent:'center',
-    alignItems:'center'
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   titleStyle: {
     fontSize: responsiveFontSize(24),
@@ -193,7 +189,12 @@ const styles: any = StyleSheet.create({
     // textShadowColor: Colors.textShadow, // Shadow color
     // textShadowOffset: {width: 1, height: 1}, // Shadow offset
     textShadowRadius: 2,
-  }
+  },
+  txtstyle2: {
+    fontSize: 14,
+    fontWeight: '400',
+    color: '#333333',
+  },
 });
 
 export default AuthVerify;

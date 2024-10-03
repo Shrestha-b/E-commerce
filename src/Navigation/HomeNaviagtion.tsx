@@ -25,6 +25,7 @@ import Combo from '../redux/Combo';
 import StoreData from '../AsyncStorage.tsx/StoreData';
 import ShoppingProduct from '../ApiIntrigation/ShoppingProduct';
 import CartDetails from '../cart.tsx/CartDetails';
+import ImojisList from '../Imoji/ImojisList';
 
 
 // Define the param list for type safety
@@ -52,7 +53,8 @@ type StackParamList = {
   Combo: undefined;
   shoppingproduct: undefined;
   StoreData: undefined;
-  cartdetails: undefined
+  cartdetails: undefined;
+  imojislist: undefined;
   // DropdownHeader: undefined;  // Ensure this matches the name you're using
 };
 
@@ -87,6 +89,7 @@ function HomeNavigation() {
         <Stack.Screen name="StoreData" component={StoreData} options={{ headerShown: false }} />
         {/* <Stack.Screen name="dropdownHeader" component={DropdownHeader} options={{ headerShown: false }} /> */}
         <Stack.Screen name="cartdetails" component={CartDetails} options={{ headerShown: false }} />
+        <Stack.Screen name="imojislist" component={ImojisList} options={{ headerShown: false }} />
 
       </Stack.Navigator>
 

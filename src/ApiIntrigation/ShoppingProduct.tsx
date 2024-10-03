@@ -42,7 +42,7 @@ const ShoppingProduct: React.FC = ({navigation}:any) => {
 
   return (
     <View style={styles.container}>
-      <CustomCartHeader />
+      <CustomCartHeader navigation={navigation}/>
       <View>
         <Image style={styles.mainImg} source={Images.banjaraworld} />
       </View>

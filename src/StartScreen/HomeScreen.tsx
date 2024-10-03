@@ -17,8 +17,6 @@ import Fonts from '../themes/Fonts';
 import MyTabs from '../Navigation/BotomTabNavigation';
 import Head from '../Header/Head';
 import Clothapi from '../ApiIntrigation/clothapi';
-import HeightPicker from '../Matrimony/WheelPicker';
-import {black} from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
 
 const HomeScreen = ({navigation}: any) => {
   return (

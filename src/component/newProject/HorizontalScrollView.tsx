@@ -16,6 +16,7 @@ import {
 import Images from '../../themes/Images';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {RfH, RfW} from '../../utils/helpers';
+import { black } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
 
 interface SliderItem {
   id: string;
@@ -97,7 +98,7 @@ const Slide: React.FC<SlideProps> = ({item, navigation}:any ) => {
       <Text style={styles.title} numberOfLines={2}>
         {item.title}
       </Text>
-      <Text numberOfLines={3} adjustsFontSizeToFit>
+      <Text numberOfLines={3} adjustsFontSizeToFit style={{color:Colors.black}}>
         {item.subtitle}
       </Text>
       </View>

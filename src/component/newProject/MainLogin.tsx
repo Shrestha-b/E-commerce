@@ -27,7 +27,6 @@ const MainLogin:React.FC  = ({navigation}:any) => {
             <TextInput
               // value={number}
               placeholder="Enter your name"
-              keyboardType="numeric"
               style={styles.inputStyle}
             />
         <View>
@@ -119,6 +118,7 @@ const styles = StyleSheet.create({
   checkboxText: {
     marginTop: 15,
     fontSize: 10,
+    color:Colors.gray
   },
   mainContainer: {
     gap: 30,
@@ -166,7 +166,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     fontSize: 20,
     backgroundColor:Colors.white,
-    paddingLeft: 10
+    paddingLeft: 10,
+    borderWidth:1,
+    borderColor:Colors.black,
   },
   line: {
     width: 1,
