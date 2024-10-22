@@ -26,7 +26,10 @@ import StoreData from '../AsyncStorage.tsx/StoreData';
 import ShoppingProduct from '../ApiIntrigation/ShoppingProduct';
 import CartDetails from '../cart.tsx/CartDetails';
 import ImojisList from '../Imoji/ImojisList';
+import DrawerNavigator from './DrawarNavigation';
+import LogOut from '../comonents/DrawerComponent.tsx/LoginOut';
 
+ 
 
 // Define the param list for type safety
 type StackParamList = {
@@ -55,6 +58,8 @@ type StackParamList = {
   StoreData: undefined;
   cartdetails: undefined;
   imojislist: undefined;
+  logout: undefined
+  drawernavigator: undefined
   // DropdownHeader: undefined;  // Ensure this matches the name you're using
 };
 
@@ -90,7 +95,8 @@ function HomeNavigation() {
         {/* <Stack.Screen name="dropdownHeader" component={DropdownHeader} options={{ headerShown: false }} /> */}
         <Stack.Screen name="cartdetails" component={CartDetails} options={{ headerShown: false }} />
         <Stack.Screen name="imojislist" component={ImojisList} options={{ headerShown: false }} />
-
+        <Stack.Screen name="logout" component={LogOut} options={{ headerShown: false }} />
+        <Stack.Screen name="drawernavigator" component={DrawerNavigator} options={{ headerShown: false }} />
       </Stack.Navigator>
 
     </NavigationContainer>

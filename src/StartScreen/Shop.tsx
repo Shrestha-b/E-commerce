@@ -16,11 +16,15 @@ import {RfH, RfW} from '../utils/helpers';
 import Images from '../themes/Images';
 import Head from '../Header/Head';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import CustomButton from '../comonents/CustomButton';
 
 interface ShopProps {
   navigation: NavigationProp<any>;
 }
 
+interface Props {
+  navigation: NavigationProp<any>;
+}
 interface DataItem {
   id: number;
   name: string;
@@ -44,7 +48,7 @@ const list = [
   {id: 4, name: 'Banjara Bazar', image: Images.kids},
 ];
 
-const Shop: React.FC<ShopProps> = ({navigation}:any) => {
+const Shop: React.FC<Props> = ({navigation,route}:any) => {
   const Api = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -137,7 +141,7 @@ const Shop: React.FC<ShopProps> = ({navigation}:any) => {
 
   return (
     <View style={styles.container}>
-      <Head />
+      <Head navigation={navigation}/>
       <View style={styles.content}>
         <ImageBackground
           source={Images.shopping}
@@ -164,6 +168,7 @@ const Shop: React.FC<ShopProps> = ({navigation}:any) => {
       <View style={{height: RfH(402), marginBottom: 80, flexDirection:'row'}}>
         <Api/>
         <Api/>
+        {/* <CustomButton /> */}
       </View>
     </View>
   );

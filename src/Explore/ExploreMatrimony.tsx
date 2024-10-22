@@ -1,22 +1,43 @@
-import {NavigationProp} from '@react-navigation/native';
+// import { DrawerNavigationProp } from '@react-navigation/drawer'; // Import DrawerNavigationProp
 import {
-  Button,
   StyleSheet,
   Text,
   Image,
-  TouchableOpacity,
   View,
 } from 'react-native';
-import HomeScreen from '../StartScreen/HomeScreen';
-import {responsiveFontSize, RfH, RfW} from '../utils/helpers';
+import React from 'react';
+import { responsiveFontSize, RfH, RfW } from '../utils/helpers';
 import Images from '../themes/Images';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 import Fonts from '../themes/Fonts';
 import Head from '../Header/Head';
-const ExploreMatrimony = ({navigation}: any) => {
+import CustomButton from '../comonents/CustomButton';
+
+interface ExploreMatrimonyProps {
+  navigation: any;
+}
+
+const ExploreMatrimony: React.FC<ExploreMatrimonyProps> = ({ navigation }) => {
+  const Child = () => {
+    // navigation.openDrawer(); // Now it will recognize openDrawer
+  };
+
+  const handleSubmit = () => {
+    console.log('Button pressed!');
+    navigation.navigate('gender');
+  };
+
+  const buttonText = (
+    <Text style={{ color: Colors.white, fontSize: 16, fontWeight: '700' }}>
+      {'Register Now'}
+    </Text>
+  );
+
   return (
     <View>
-      <Head />
+      <Head
+        Child={Child}
+      />
       <View style={styles.container}>
         <View style={styles.RegisterTxt}>
           <Text
@@ -44,19 +65,21 @@ const ExploreMatrimony = ({navigation}: any) => {
           </Text>
           <Text style={styles.Embarktxt}>could be just a click away!</Text>
         </View>
-        <View>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate('newepl')}>
-            <Text style={styles.btnText}>Explore Matrimony</Text>
-          </TouchableOpacity>
-        </View>
+        <CustomButton
+          navigation={() => navigation.navigate('gender')}
+          buttonText={buttonText}
+          submitFunction={handleSubmit}
+          style={styles.button}
+        />
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  customstyle: {
+    color: 'blue',
+  },
   container: {
     marginTop: 180,
     borderTopLeftRadius: 40,
@@ -64,7 +87,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     height: RfH(581),
     width: RfW(375),
-    // justifyContent: 'center',
     alignItems: 'center',
   },
   Embarktxt: {
@@ -113,4 +135,5 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 });
+
 export default ExploreMatrimony;

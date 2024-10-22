@@ -31,7 +31,7 @@ interface ProductsProps {
 }
 
 // Products component definition
-const Products: FC<ProductsProps> = ({ item }) => {
+const Products:React.FC<ProductsProps> = ({ item }) => {
   const [addedToCart, setAddedToCart] = useState<{ [key: number]: boolean }>({}); // Track added status by product ID
   const dispatch = useDispatch();
   const cartItems = useSelector((state: any) => state.cart.cartItems || []);

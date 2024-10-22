@@ -110,7 +110,6 @@ const styles: any = StyleSheet.create({
     flex: 1,
   },
   otpInput: {
-    borderBottomWidth: 1,
     borderColor: 'gray',
     textAlign: 'center',
     width: 40,

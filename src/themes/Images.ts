@@ -38,7 +38,8 @@ const Images = {
   SmileEmoji: require("../assest/Imageses/SmileEmoji.png"),
   NotificationBell: require("../assest/Imageses/notificationbell.png"),
   menuIcon: require("../assest/Imageses/menuimg.png"),
-
+  tablerplus: require("../assest/Imageses/tablerplus.png"),
+  iconoirminus: require("../assest/Imageses/iconoirminus.png"),
 };
 export default Images;
  

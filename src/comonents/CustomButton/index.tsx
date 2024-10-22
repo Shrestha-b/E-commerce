@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   ActivityIndicator,
   StyleSheet,
@@ -5,77 +6,69 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
-
 import Colors from '../../themes/Colors';
-import PropTypes from 'prop-types';
-import {responsiveFontSize} from '../../utils/helpers';
+import {responsiveFontSize, RfH, RfW} from '../../utils/helpers';
 
-function CustomButton(props) {
-  const {
-    submitFunction,
-    buttonText,
-    style,
-    containerStyling,
-    activityIndicatorColor,
-    displayLoader,
-    tintColor,
-  } = props;
+// Define prop types
+interface CustomButtonProps {
+  submitFunction: () => void;
+  buttonText?: any;
+  style?: object;
+  containerStyling?: object;
+  activityIndicatorColor?: string; 
+  displayLoader?: boolean;
+  tintColor?: string;
+  navigation: () => void;
+}
 
+const CustomButton: React.FC<CustomButtonProps> = ({
+  submitFunction,
+  buttonText = 'Submit',
+  style = {},
+  containerStyling = {},
+  activityIndicatorColor = Colors.appcolor,
+  displayLoader = false,
+  tintColor,
+  navigation 
+
+}) => {
   return (
-    <View style={{}}>
+    <View style={{flex: 1, ...containerStyling}}>
       <TouchableOpacity
         activeOpacity={0.8}
         disabled={displayLoader}
-        onPress={() => {
-          submitFunction();
-        }}>
-        <View style={styles.footerButton}>
-          {displayLoader ? (
-            <ActivityIndicator />
-          ) : (
-            <Text
-              style={{color: Colors.white, fontSize: responsiveFontSize(15)}}>
-              {buttonText}
-            </Text>
-          )}
-        </View>
+        onPress={submitFunction}
+        style={[styles.button,style]}
+      >
+        {displayLoader ? (
+          <ActivityIndicator color={activityIndicatorColor} />
+        ) : (
+          <Text style={{color: Colors.white, fontSize: responsiveFontSize(15)}}>
+            {buttonText}
+          </Text>
+        )}
       </TouchableOpacity>
     </View>
   );
-}
-
-CustomButton.propTypes = {
-  backgroundColor: PropTypes.string,
-  containerStyling: PropTypes.object,
-  style: PropTypes.any,
-  submitFunction: PropTypes.func,
-  activityIndicatorColor: PropTypes.any,
-  displayLoader: PropTypes.bool,
-  buttonText: PropTypes.string,
-};
-
-CustomButton.defaultProps = {
-  backgroundColor: '#000000',
-  style: {},
-  containerStyling: {},
-  submitFunction: null,
-  displayLoader: true,
-  buttonText: 'Submit',
-  activityIndicatorColor: Colors.appcolor,
 };
 
 export default CustomButton;
-const styles = StyleSheet.create({
-  selectImg: {width: 25, height: 25, tintColor: Colors.grapAppColor},
 
-  // -----------------footerButton
+const styles = StyleSheet.create({
   footerButton: {
     borderWidth: 1,
     borderColor: Colors.appcolor,
-    borderRadius: 40,
     paddingVertical: 15,
     alignItems: 'center',
     backgroundColor: Colors.appcolor,
+  },
+  button: {
+    borderRadius: 10,
+    height: RfH(51),
+    width: RfW(319),
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#FF5069',
+    // marginBottom:20
   },
 });

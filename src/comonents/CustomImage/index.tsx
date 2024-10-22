@@ -1,16 +1,12 @@
 import {ActivityIndicator, Image, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 import {RfH, RfW, getImageSource} from '../../utils/helpers';
-
-import Colors from '../../themes/Colors';
-import Images from '../../themes/Images';
-import KiteSquareBox from '../../container/orders/components/KiteSquareBox';
 import PropTypes from 'prop-types';
 import {TOUCHABLE_ACTIVE_OPACITY_VALUE} from '../../utils/constants';
 import {getIconImageStyle} from './styles';
-import {isNumber} from 'lodash';
+// import {isNumber} from 'lodash';
 
-function CustomImage(props) {
+function CustomImage({props}:any) {
   const {
     submitFunction,
     image,
@@ -25,6 +21,7 @@ function CustomImage(props) {
     tintColor,
   } = props;
   const [isError, setIsError] = useState(false);
+  const [isNumber, setIsNumber] = useState('')
   const [loading, setLoading] = useState(false);
   const imageObject = image ? getImageSource(image) : placeHolderImage;
   const sourceImage = isError ? getImageSource(placeHolderImage) : imageObject;
@@ -95,9 +92,9 @@ CustomImage.defaultProps = {
   style: {},
   containerStyling: {},
   submitFunction: null,
-  placeHolderImage: Images.noImage,
+  // placeHolderImage: Images.noImage,
   displayLoader: true,
-  activityIndicatorColor: Colors.blue,
+  // activityIndicatorColor: Colors.blue,
 };
 
 export default CustomImage;

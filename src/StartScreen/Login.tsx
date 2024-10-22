@@ -1,13 +1,18 @@
-import {NavigationProp} from '@react-navigation/native';
-import {Button, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import MatrimonyProfile from '../Matrimony/MatrimonyProfile';
 import HomeScreen from './HomeScreen';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 
-const Matrimony = ({navigation}: {navigation: NavigationProp<any>}) => {
+type RoutProps = {
+  navigation: any;
+  route: any;
+};
+
+
+const Matrimony: React.FC<RoutProps> = ({ navigation, route}) => {
   return (
     <View>
-      <HomeScreen />
+      <HomeScreen navigation={navigation} route={route}/>
       <MatrimonyProfile />
     </View>
   );
@@ -20,4 +25,5 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
+
 export default Matrimony;

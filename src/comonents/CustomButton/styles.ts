@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const getIconImageStyle = (iconHeight, iconWidth, backgroundColor) => ({
+const getIconImageStyle = ({iconHeight, iconWidth, backgroundColor}:any) => ({
   height: iconHeight,
   width: iconWidth,
   backgroundColor,

@@ -6,10 +6,14 @@ import Images from '../themes/Images';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import Fonts from '../themes/Fonts';
 import Head from '../Header/Head';
-const NewEpl = ({navigation}:any) => {
+interface rout{
+  navigation:any;
+  route: any;
+}
+const NewEpl:React.FC<any> = ({navigation,route}:rout) => {
   return (
     <View>
-      <Head />
+      <Head navigation={navigation} route={route}/>
         <View style={styles.container}>
             <View style={styles.RegisterTxt}>
             <Text style={{marginTop: 25,fontSize:14,fontWeight:'500',position:'absolute'}}>Register to Explore</Text>

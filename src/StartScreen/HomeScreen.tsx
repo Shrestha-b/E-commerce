@@ -6,59 +6,68 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
+  Button
 } from 'react-native';
 import Images from '../themes/Images';
 import {RfH, RfW, responsiveFontSize} from '../utils/helpers';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Fonts from '../themes/Fonts';
-import MyTabs from '../Navigation/BotomTabNavigation';
-import Head from '../Header/Head';
 import Clothapi from '../ApiIntrigation/clothapi';
+import Head from '../Header/Head';
+import { useNavigation } from '@react-navigation/native';
 
-const HomeScreen = ({navigation}: any) => {
+interface HomeScreens {
+  navigation: any;
+}
+
+const HomeScreen: React.FC<HomeScreens> = ({ navigation }) => {
+  // Child function to open the drawer
+  
   return (
     <View style={styles.container}>
-      <Head />
       <HomeScroll navigation={navigation} />
-      {/* <MyTabs /> */}
     </View>
   );
 };
 
-const HomeScroll = ({navigation}: any) => {
+const HomeScroll = ({navigation}:any) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
-
+  // const navigation:any = useNavigation(); 
   const handleScroll = (event: any) => {
     const contentOffsetX = event.nativeEvent.contentOffset.x;
     const index = Math.floor(contentOffsetX / 335); // Assuming the width of each item is 335
     setActiveIndex(index);
   };
-
+const Child = () =>{
+}
   return (
     <View style={styles.maincontainer}>
+    <Head Child={Child}/>
       <Animated.ScrollView
-      pagingEnabled
+        pagingEnabled
         horizontal
-        // style={styles.scrollView}
         showsHorizontalScrollIndicator={false}
         scrollEventThrottle={16}
         onScroll={Animated.event(
-          [{nativeEvent: {contentOffset: {x: scrollX}}}],
-          {useNativeDriver: false, listener: handleScroll},
-        )}>
+          [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+          { useNativeDriver: false, listener: handleScroll }
+        )}
+      >
+        {/* Slide 1 */}
         <View style={styles.box}>
           <ImageBackground
             source={Images.SliderImg}
-            style={styles.backgroundImage}>
+            style={styles.backgroundImage}
+          >
             <View style={styles.overlay}>
               <Text style={styles.text}>“Find Your Perfect Match”</Text>
               <TouchableOpacity
                 style={styles.button}
-                onPress={() => navigation.navigate('explorematrimony')}>
+                onPress={() => navigation.navigate('explorematrimony')}
+              >
                 <Text style={styles.btnText}>Explore Matrimony</Text>
               </TouchableOpacity>
               <View style={styles.dotContainer}>
@@ -76,10 +85,12 @@ const HomeScroll = ({navigation}: any) => {
           </ImageBackground>
         </View>
 
+        {/* Slide 2 */}
         <View style={styles.box}>
           <ImageBackground
             source={Images.SliderImg}
-            style={styles.backgroundImage}>
+            style={styles.backgroundImage}
+          >
             <View style={styles.overlay}>
               <Text style={styles.text}>Box 2</Text>
               <View style={styles.dotContainer}>
@@ -97,10 +108,12 @@ const HomeScroll = ({navigation}: any) => {
           </ImageBackground>
         </View>
 
+        {/* Slide 3 */}
         <View style={styles.box}>
           <ImageBackground
             source={Images.SliderImg}
-            style={styles.backgroundImage}>
+            style={styles.backgroundImage}
+          >
             <View style={styles.overlay}>
               <Text style={styles.text}>Box 3</Text>
               <View style={styles.dotContainer}>
@@ -119,29 +132,31 @@ const HomeScroll = ({navigation}: any) => {
         </View>
       </Animated.ScrollView>
 
+      {/* Shop Button */}
       <View style={styles.productHeader}>
-        <View style={{flexDirection:'row', alignItems:'center', height:17.5,width:145, justifyContent:'space-between'}}>
-        <Image source={Images.shopbag} style={{height: 17.25, width: 17.25}} />
-        <Text style={{color: 'black'}}>Shop</Text>
-        <Image
-          style={{height: 10, width: 10,marginTop:3}}
-          source={Images.rightarrow}></Image>
-        <View>
-          <Text style={styles.Trending}>Trending Now</Text>
-        </View>
+        <View style={{ flexDirection: 'row', alignItems: 'center', height: 17.5, width: 145, justifyContent: 'space-between' }}>
+          <Image source={Images.shopbag} style={{ height: 17.25, width: 17.25 }} />
+          <TouchableOpacity onPress={() => navigation.navigate('logout')}>
+          <Text style={{ color: 'black' }}>Shop</Text>
+          </TouchableOpacity>
+          <Image style={{ height: 10, width: 10, marginTop: 3 }} source={Images.rightarrow} />
+          <View>
+          <TouchableOpacity onPress={()=>{}}>
+            <Text style={styles.Trending}>Trending Now</Text>
+            </TouchableOpacity>
+          </View>
         </View>
         <View>
           <Image source={Images.circlearrow} style={styles.circlearrow} />
         </View>
       </View>
-
       <Clothapi />
       <Image style={styles.footerImg} source={Images.footerImg} />
     </View>
   );
 };
-//explorematrimony
 
+// Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -151,21 +166,12 @@ const styles = StyleSheet.create({
     width: RfW(335),
     marginLeft: 20,
   },
-  // scrollView: {
-  //   margin: 20,
-  // },
-  containers: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   productHeader: {
     flexDirection: 'row',
-    gap: 4,
     width: RfW(335),
     marginBottom: 20,
-    justifyContent:'space-between',
-    alignItems:'center'
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   box: {
     width: RfW(335),
@@ -178,7 +184,7 @@ const styles = StyleSheet.create({
   },
   backgroundImage: {
     flex: 1,
-    resizeMode: 'cover', // or 'stretch'
+    resizeMode: 'cover',
     justifyContent: 'center',
     width: RfW(335),
   },
@@ -186,7 +192,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'relative',
   },
   text: {
     color: 'white',
@@ -240,4 +245,5 @@ const styles = StyleSheet.create({
     width: RfW(18),
   },
 });
+
 export default HomeScreen;

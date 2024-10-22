@@ -14,20 +14,13 @@ const MyProfile = () => {
   const [imgUrl, setImgUrl] = useState('https://source.unsplash.com/random/400x300');
 //   const userdata = useSelector((state: any) => state.user);
 
-
-interface MyComponentProps {
-  imagUrl: string;
+const storeData = async() =>{
+  await AsyncStorage.setItem("Image",imgUrl)
 }
 
-const storeData = async (key: string, value: MyComponentProps) => {
-  try {
-    const jsonValue = JSON.stringify(value);
-    await AsyncStorage.setItem(key, jsonValue);
-    console.log('Data stored successfully');
-  } catch (error) {
-    console.error('Error storing data:', error);
-  }
-};
+const getData = async() => {
+  await AsyncStorage.getItem('Image')
+}
   // Function to open the camera and handle image picking
   const openCamera = async () => {
     console.log('Camera Pressed');
@@ -41,6 +34,7 @@ const storeData = async (key: string, value: MyComponentProps) => {
     if (result.assets && result.assets.length > 0) {
       setImgUrl(result.assets[0].uri || imgUrl);
     }
+
   };
 
   // Function to open the image library and handle image picking
@@ -57,13 +51,12 @@ const storeData = async (key: string, value: MyComponentProps) => {
     }
   };
 
-// const storeData = async () => {
-//   try {
-//     await AsyncStorage.setItem();
-//   } catch (error) {
-//     // Error saving data
-//   }
-// };
+
+  const handleCameradata = () => {
+    openCamera();
+    storeData();
+    // openAlbum()
+  }
   return (
     <View style={styles.container}>
       <View style={styles.headercontainer}>
@@ -73,10 +66,12 @@ const storeData = async (key: string, value: MyComponentProps) => {
         </View>
       </View>
       <View style={styles.profile}>
-        <TouchableOpacity onPress={openCamera}>
+        <TouchableOpacity onPress={handleCameradata}>
           <Image style={styles.profileImg} source={{ uri: imgUrl }} />
         </TouchableOpacity>
+        <TouchableOpacity onPress={getData}>
         <Text style={{ fontWeight: '600', fontSize: 20, marginTop: 20 }}>Hi, Alia</Text>
+        </TouchableOpacity>
         <Text style={{ fontWeight: '400', fontSize: 14, marginTop: 5 }}>youremail@domain.com | +09 234 567 89</Text>
       </View>
       <View style={styles.footer}>

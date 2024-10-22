@@ -6,15 +6,16 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Fonts from '../themes/Fonts';
 import {responsiveFontSize} from '../utils/helpers';
 
-const Gender = ({navigation}: any) => {
+const Gender = ({navigation,props}: any) => {
+  console.log(props)
   return (
     <View style={styles.container}>
-      <AiHade navigation={navigation} />
+      <AiHade navigation={navigation} props={props}/>
     </View>
   );
 };
 
-const AiHade = ({navigation}: any) => {
+const AiHade = ({navigation,props}: any) => {
   const [selectedGender, setSelectedGender] = useState<string | null>(null);
 
   const handleGenderSelect = (gender: string) => {
@@ -37,7 +38,10 @@ const AiHade = ({navigation}: any) => {
         </View>
       </View>
 
-      <Text style={styles.name}>What’s Your Gender?</Text>
+      {/* Removed props and corrected the navigation */}
+      {/* <TouchableOpacity onPress={() => props.navigation.navigate('')}> */}
+        <Text style={styles.name}>What’s Your Gender?</Text>
+      {/* </TouchableOpacity> */}
       <Text style={styles.subText}>Tell us about your gender</Text>
 
       <View style={styles.txtbtn}>
@@ -98,7 +102,6 @@ const styles = StyleSheet.create({
   backarrow: {
     width: RfW(24),
     height: RfH(24),
-    // marginTop: 10,
     verticalAlign: 'middle',
   },
   containers: {
@@ -139,7 +142,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     height: RfH(569),
     width: RfW(300),
-    // marginTop: 41,
     marginBottom: 30,
   },
   button: {
@@ -149,7 +151,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#FF5069',
-    // marginBottom:20
   },
   btnText: {
     color: Colors.white,

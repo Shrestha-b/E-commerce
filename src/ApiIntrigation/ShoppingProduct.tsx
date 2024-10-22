@@ -5,7 +5,7 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 import CustomCartHeader from '../comonents/CartCustomHeader';
 import Images from '../themes/Images';
 import {responsiveFontSize, RfH, RfW} from '../utils/helpers';
-import {} from 'react-native-gesture-handler';
+// import {} from 'react-native-gesture-handler';
 
 // create a component
 const ShoppingProduct: React.FC = ({navigation}:any) => {
