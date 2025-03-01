@@ -28,6 +28,8 @@ import CartDetails from '../cart.tsx/CartDetails';
 import ImojisList from '../Imoji/ImojisList';
 import DrawerNavigator from './DrawarNavigation';
 import LogOut from '../comonents/DrawerComponent.tsx/LoginOut';
+import FormScreen from '../Form/FormScreen.js4';
+import ListScreen from '../Form/ListScreen';
 
  
 
@@ -60,6 +62,8 @@ type StackParamList = {
   imojislist: undefined;
   logout: undefined
   drawernavigator: undefined
+  listScreen: undefined
+  formScreen: undefined
   // DropdownHeader: undefined;  // Ensure this matches the name you're using
 };
 
@@ -97,6 +101,9 @@ function HomeNavigation() {
         <Stack.Screen name="imojislist" component={ImojisList} options={{ headerShown: false }} />
         <Stack.Screen name="logout" component={LogOut} options={{ headerShown: false }} />
         <Stack.Screen name="drawernavigator" component={DrawerNavigator} options={{ headerShown: false }} />
+        <Stack.Screen name="formScreen" component={FormScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="listScreen" component={ListScreen} options={{ headerShown: false }} />
+
       </Stack.Navigator>
 
     </NavigationContainer>
