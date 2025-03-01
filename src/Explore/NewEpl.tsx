@@ -13,7 +13,7 @@ interface rout{
 const NewEpl:React.FC<any> = ({navigation,route}:rout) => {
   return (
     <View>
-      <Head navigation={navigation} route={route}/>
+      <Head Child={Child}/>
         <View style={styles.container}>
             <View style={styles.RegisterTxt}>
             <Text style={{marginTop: 25,fontSize:14,fontWeight:'500',position:'absolute'}}>Register to Explore</Text>

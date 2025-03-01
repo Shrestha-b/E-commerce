@@ -4,13 +4,10 @@ import Images from "../themes/Images";
 import { RfH, RfW } from "../utils/helpers";
 
 interface HeadProps {
-  // navigations: () => void; // Changed to a function type
-  Child: () => any; 
+  onPress: (navigation: any) => void;  // Function now accepts navigation
 }
-
 const Head: React.FC<HeadProps> = ({
-  // navigations,
-  Child
+  onPress
 }) => {
   return (
     <View style={styles.header}>
@@ -21,8 +18,10 @@ const Head: React.FC<HeadProps> = ({
         </Text>
       </View>
       <View style={{ flexDirection: 'row', gap: 10, marginTop: 10 }}>
-        <Image style={{ height: 25, width: 25 }} source={Images.NotificationBell} />
-        <TouchableOpacity onPress={Child}>
+        <Image 
+        resizeMode="cover"
+        style={{ height: 25, width: 25 }} source={Images.NotificationBell} />
+        <TouchableOpacity onPress={onPress}>
           <Image style={{ height: 25, width: 25 }} source={Images.menuIcon} />
         </TouchableOpacity>
       </View>

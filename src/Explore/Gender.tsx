@@ -6,10 +6,15 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Fonts from '../themes/Fonts';
 import {responsiveFontSize} from '../utils/helpers';
 
-const Gender = ({navigation,props}: any) => {
+const Gender = ({navigation,props,route}:any) => {
+  const {id,name} = route.params
+  console.log("Routename", id,name)
+  
   console.log(props)
   return (
     <View style={styles.container}>
+      <Text>{id}</Text>
+      <Text>{name}</Text>
       <AiHade navigation={navigation} props={props}/>
     </View>
   );

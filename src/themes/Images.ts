@@ -40,6 +40,8 @@ const Images = {
   menuIcon: require("../assest/Imageses/menuimg.png"),
   tablerplus: require("../assest/Imageses/tablerplus.png"),
   iconoirminus: require("../assest/Imageses/iconoirminus.png"),
+  delete: require("../assest/Imageses/close.png"),
+
 };
 export default Images;
  

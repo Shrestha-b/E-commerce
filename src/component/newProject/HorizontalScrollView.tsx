@@ -16,7 +16,6 @@ import {
 import Images from '../../themes/Images';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {RfH, RfW} from '../../utils/helpers';
-import { black } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
 
 interface SliderItem {
   id: string;

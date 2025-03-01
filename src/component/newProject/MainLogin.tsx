@@ -12,7 +12,6 @@ import { RfH, RfW, responsiveFontSize } from '../../utils/helpers';
 import Fonts from '../../themes/Fonts';
 import PhoneInput from 'react-native-phone-number-input';
 
-typeinferance:{}
 const MainLogin:React.FC  = ({navigation}:any) => {
   const [isSelected, setSelection] = useState(false);
   const phoneInput = useRef<PhoneInput>(null);
@@ -134,8 +133,8 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: 'center',
+    justifyContent:'center',
     backgroundColor: '#FF5069',
-    padding: 10,
     borderRadius: 10,
     height: 56,
     width: 325,
@@ -189,3 +188,58 @@ const styles = StyleSheet.create({
 });
 
 export default MainLogin;
+// import React, { useState } from 'react';
+// import { View, TextInput, Button, Text } from 'react-native';
+// import auth from '@react-native-firebase/auth';
+
+// const MainLogin = () => {
+//   const [phoneNumber, setPhoneNumber] = useState('');
+//   const [verificationId, setVerificationId] = useState('');
+//   const [code, setCode] = useState('');
+
+//   // Function to send OTP
+//   const sendOtp = async () => {
+//     try {
+//       const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
+//       setVerificationId(confirmation.verificationId);
+//       alert('OTP sent to ' + phoneNumber);
+//     } catch (error) {
+//       console.error(error);
+//       alert('Failed to send OTP');
+//     }
+//   };
+
+//   // Function to verify OTP
+//   const verifyOtp = async () => {
+//     try {
+//       const credential = auth.PhoneAuthProvider.credential(verificationId, code);
+//       await auth().signInWithCredential(credential);
+//       alert('Phone number verified successfully');
+//     } catch (error) {
+//       console.error(error);
+//       alert('Invalid OTP');
+//     }
+//   };
+
+//   return (
+//     <View>
+//       <TextInput
+//         placeholder="Enter phone number"
+//         value={phoneNumber}
+//         onChangeText={setPhoneNumber}
+//         keyboardType="phone-pad"
+//       />
+//       <Button title="Send OTP" onPress={sendOtp} />
+
+//       <TextInput
+//         placeholder="Enter OTP"
+//         value={code}
+//         onChangeText={setCode}
+//         keyboardType="numeric"
+//       />
+//       <Button title="Verify OTP" onPress={verifyOtp} />
+//     </View>
+//   );
+// };
+
+// export default MainLogin;

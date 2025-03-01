@@ -1,0 +1,211 @@
+import React, { useEffect, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {
+  TextInput,
+  View,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  Image,
+  TouchableOpacity,
+  Button
+} from 'react-native';
+import Images from '../themes/Images';
+import { responsiveFontSize, RfH, RfW } from '../utils/helpers';
+import Fonts from '../themes/Fonts';
+
+const FormScreen = ({ navigation, route }) => {
+  const [name, setName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [age, setAge] = useState('');
+  const [index, setindex] = useState('');
+
+  useEffect(() => {
+    if (route?.params) {
+      setName(route.params.name);
+      setLastName(route.params.lastName);
+      setAge(route.params.age);
+      setindex(route.params.index)
+    }
+  }, [route?.params]);
+
+  const handleSave = async() => {
+    try {
+      const storedData = await AsyncStorage.getItem('userName');
+      let parsedData = [];
+
+      if (storedData) {
+        parsedData = JSON.parse(storedData);
+      }
+
+    const updatedEntry = { name, lastName, age };
+    if (route?.params) {
+
+      parsedData[index]=updatedEntry
+      await AsyncStorage.setItem('userName', JSON.stringify(parsedData));
+      navigation.goBack();
+      return;
+    }
+
+    // Save new entry locally if no params exist
+      const updatedData = [...parsedData, updatedEntry];
+      await AsyncStorage.setItem('userName', JSON.stringify(updatedData));
+      alert('Data stored successfully!');
+      setName('');
+      setLastName('');
+      setAge('');
+      navigation.goBack();
+    } catch (error) {
+      console.error('Error storing data:', error);
+      alert('Failed to store data!');
+    }
+  };
+
+
+  const handleCancel = () => {
+    if (navigation && navigation.goBack) {
+      navigation.goBack();
+    }
+  };
+
+  return (
+    <SafeAreaView style={styles.container}>
+      {/* Header */}
+      <View style={styles.headerContainer}>
+        <TouchableOpacity onPress={handleCancel}>
+          <Image source={Images.backarrow} style={styles.backArrow} />
+        </TouchableOpacity>
+        <Text style={styles.productHeader}>Form</Text>
+      </View>
+
+      {/* Input Fields */}
+      <SafeAreaView style={styles.textBoxContainer}>
+        <Text style={styles.inputTextHeader}>Name:</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={setName}
+          value={name}
+          placeholder="Name"
+        />
+        {!name && <Text style={{ color: 'red' }}>Please Enter Name</Text>}
+
+        <Text style={styles.inputTextHeader}>Last Name:</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={setLastName}
+          value={lastName}
+          placeholder="Last Name"
+        />
+        {!lastName && <Text style={{ color: 'red' }}>Please Enter LastName</Text>}
+
+        <Text style={styles.inputTextHeader}>Age:</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={setAge}
+          value={age}
+          placeholder="Age"
+          keyboardType='number-pad'
+
+        />
+
+{/*         <Text>{index}</Text> */}
+        {!age && <Text style={{ color: 'red' }}>Please Enter age</Text>}
+        {/* <Button  title='callback'  onPress={sendBack}/> */}
+      </SafeAreaView>
+
+      {/* Footer Buttons */}
+      <View style={styles.footerButtons}>
+        <TouchableOpacity style={styles.cancelButton} onPress={handleCancel}>
+          <Text style={styles.btnText}>Cancel</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
+          <Text style={styles.saveBtnText}>Save</Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
+  );
+};
+
+// Styles
+const styles = StyleSheet.create({
+  // Styles remain unchanged
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: 'white',
+  },
+  productHeader: {
+    fontSize: 24,
+    color: 'black',
+    marginLeft: 20,
+  },
+  headerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 50,
+    width: '90%',
+  },
+  backArrow: {
+    width: 20,
+    height: 20,
+    resizeMode: 'contain',
+  },
+  textBoxContainer: {
+    width: '90%',
+    marginTop: 20,
+  },
+  inputTextHeader: {
+    paddingVertical: 10,
+    color: 'black',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  input: {
+    height: 40,
+    width: '100%',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 10,
+  },
+  footerButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    width: '100%',
+    position: 'absolute',
+    bottom: 30,
+  },
+  saveButton: {
+    height: RfH(50),
+    width: RfW(140),
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#FF5069',
+    borderRadius: 10,
+  },
+  cancelButton: {
+    height: RfH(50),
+    width: RfW(140),
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: 'black',
+    borderRadius: 10,
+  },
+  btnText: {
+    color: 'black',
+    fontSize: responsiveFontSize(19),
+    fontFamily: Fonts.UextraBold,
+    fontWeight: '700',
+  },
+  saveBtnText: {
+    color: 'white',
+    fontSize: responsiveFontSize(19),
+    fontFamily: Fonts.UextraBold,
+    fontWeight: '700',
+  },
+});
+
+export default FormScreen;

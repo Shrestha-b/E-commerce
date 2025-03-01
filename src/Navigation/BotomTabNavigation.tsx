@@ -3,7 +3,6 @@ import HomeScreen from '../StartScreen/HomeScreen';
 import Shop from '../StartScreen/Shop';
 import Profile from '../StartScreen/Profile';
 import Matrimony from '../StartScreen/Login';
-import Octicons from 'react-native-vector-icons/Octicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 
@@ -20,12 +19,29 @@ function MyTabs() {
       <Tab.Screen
         name="Home"
         component={HomeScreen}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({color, size}) => (
-            <Octicons name="home" size={size} color={color} />
-          ),
-        }}
+        // screenOptions = {({route}:any)=>{
+        //   tabBarIcon = ({focused}:any)=>{
+        //     let iconSource;
+
+        //     if (route.name === 'Home') {
+        //       iconSource = focused
+        //         ? require(Images.Male) // Active icon
+        //         : require(Images.female); // Inactive icon
+        //     } else if (route.name === 'Profile') {
+        //       iconSource = focused
+        //         ? require(Images.Male)
+        //         : require(Images.Male);
+        //     }
+        //   }
+        // }
+
+        // }
+       options={{
+        headerShown: false,
+        tabBarIcon: ({color, size}) => (
+          <Entypo name="man" size={size} color={color} />
+        )
+      }}
       />
       <Tab.Screen
         name="Shopping"
@@ -38,7 +54,7 @@ function MyTabs() {
               size={size}
               color={color}
             />
-          ),
+          )
         }}
       />
       <Tab.Screen
@@ -48,7 +64,7 @@ function MyTabs() {
           headerShown: false,
           tabBarIcon: ({color, size}) => (
             <Entypo name="man" size={size} color={color} />
-          ),
+          )
         }}
       />
       <Tab.Screen
@@ -58,7 +74,7 @@ function MyTabs() {
           headerShown: false,
           tabBarIcon: ({color, size}) => (
             <Entypo name="user" size={size} color={color} />
-          ),
+          )
         }}
       />
     </Tab.Navigator>

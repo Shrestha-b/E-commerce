@@ -4,6 +4,7 @@ import {
   Text,
   Image,
   View,
+  Button,
 } from 'react-native';
 import React from 'react';
 import { responsiveFontSize, RfH, RfW } from '../utils/helpers';
@@ -22,10 +23,10 @@ const ExploreMatrimony: React.FC<ExploreMatrimonyProps> = ({ navigation }) => {
     // navigation.openDrawer(); // Now it will recognize openDrawer
   };
 
-  const handleSubmit = () => {
-    console.log('Button pressed!');
-    navigation.navigate('gender');
-  };
+  // const handleSubmit = () => {
+  //   console.log('Button pressed!');
+  //   navigation.navigate('gender',{id:1,name:'shrestha'});
+  // };
 
   const buttonText = (
     <Text style={{ color: Colors.white, fontSize: 16, fontWeight: '700' }}>
@@ -35,9 +36,9 @@ const ExploreMatrimony: React.FC<ExploreMatrimonyProps> = ({ navigation }) => {
 
   return (
     <View>
-      <Head
+      {/* <Head
         Child={Child}
-      />
+      /> */}
       <View style={styles.container}>
         <View style={styles.RegisterTxt}>
           <Text
@@ -65,12 +66,13 @@ const ExploreMatrimony: React.FC<ExploreMatrimonyProps> = ({ navigation }) => {
           </Text>
           <Text style={styles.Embarktxt}>could be just a click away!</Text>
         </View>
-        <CustomButton
-          navigation={() => navigation.navigate('gender')}
+        {/* <CustomButton
+          navigation={() => navigation.navigate('gender',{id:1,name:'shree'})}
           buttonText={buttonText}
           submitFunction={handleSubmit}
           style={styles.button}
-        />
+        /> */}
+        <Button title='route' onPress={() => navigation.navigate('gender',{id:1,name:'shrestha '})} />
       </View>
     </View>
   );

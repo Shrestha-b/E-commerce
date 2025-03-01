@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {FC, useRef, useState} from 'react';
 import {
   Animated,
   Image,
@@ -8,7 +8,9 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Button
+  Button,
+  TouchableHighlight,
+  PixelRatio
 } from 'react-native';
 import Images from '../themes/Images';
 import {RfH, RfW, responsiveFontSize} from '../utils/helpers';
@@ -16,10 +18,10 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Fonts from '../themes/Fonts';
 import Clothapi from '../ApiIntrigation/clothapi';
 import Head from '../Header/Head';
-import { useNavigation } from '@react-navigation/native';
 
 interface HomeScreens {
   navigation: any;
+
 }
 
 const HomeScreen: React.FC<HomeScreens> = ({ navigation }) => {
@@ -35,18 +37,20 @@ const HomeScreen: React.FC<HomeScreens> = ({ navigation }) => {
 const HomeScroll = ({navigation}:any) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
-  // const navigation:any = useNavigation(); 
   const handleScroll = (event: any) => {
     const contentOffsetX = event.nativeEvent.contentOffset.x;
     const index = Math.floor(contentOffsetX / 335); // Assuming the width of each item is 335
     setActiveIndex(index);
   };
-const Child = () =>{
-}
+  const handlePress = ({ navigation }:any) => {
+    navigation.navigate('age');
+  };
   return (
+    
+    <View>
+    <Head onPress={handlePress}/>
     <View style={styles.maincontainer}>
-    <Head Child={Child}/>
-      <Animated.ScrollView
+    <Animated.ScrollView
         pagingEnabled
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -140,11 +144,9 @@ const Child = () =>{
           <Text style={{ color: 'black' }}>Shop</Text>
           </TouchableOpacity>
           <Image style={{ height: 10, width: 10, marginTop: 3 }} source={Images.rightarrow} />
-          <View>
-          <TouchableOpacity onPress={()=>{}}>
+          <TouchableHighlight onPress={()=>{}}>
             <Text style={styles.Trending}>Trending Now</Text>
-            </TouchableOpacity>
-          </View>
+            </TouchableHighlight>
         </View>
         <View>
           <Image source={Images.circlearrow} style={styles.circlearrow} />
@@ -153,6 +155,7 @@ const Child = () =>{
       <Clothapi />
       <Image style={styles.footerImg} source={Images.footerImg} />
     </View>
+    </View>
   );
 };
 
@@ -160,11 +163,13 @@ const Child = () =>{
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent:'center',
+    alignItems:'center',
+    // textAlign:'center'
   },
   maincontainer: {
     flex: 1,
     width: RfW(335),
-    marginLeft: 20,
   },
   productHeader: {
     flexDirection: 'row',
@@ -177,9 +182,8 @@ const styles = StyleSheet.create({
     width: RfW(335),
     height: RfH(223),
     backgroundColor: 'lightblue',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 10,
+    // justifyContent: 'center',
+    // alignItems: 'center',
     borderRadius: 10,
   },
   backgroundImage: {
@@ -200,8 +204,8 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 10,
-    height: 37,
-    width: 169,
+    height: RfH(37),
+    width: RfW(169),
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#FF5069',

@@ -4,13 +4,15 @@ import {Image, View, Text, StyleSheet} from 'react-native';
 import Images from '../themes/Images';
 import {RfH, RfW} from '../utils/helpers';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {green} from 'react-native-reanimated/lib/typescript/reanimated2/Colors';
 
 // create a component
 const MatrimonyProfile = () => {
   return (
     <View style={styles.maincontainer}>
+      <View >
+
       <Image style={styles.marimonyprofile} source={Images.marimonyprofile} />
+      </View>
       <View style={styles.AliaView}>
         <View>
           <Text style={styles.txt1}>Alia Warner</Text>
@@ -20,7 +22,7 @@ const MatrimonyProfile = () => {
           <Image source={Images.editlogo} />
         </View>
       </View>
-
+<Text> every student come here beacuse </Text>
       <View style={styles.footerBox}>
         <View style={styles.footerBoxHeader}>
           <Text style={styles.footerBoxHeaderTXT}>My Profile</Text>

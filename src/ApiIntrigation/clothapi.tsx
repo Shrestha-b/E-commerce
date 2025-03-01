@@ -157,6 +157,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.UextraBold,
     fontWeight: '700',
   },
+  
 });
 
 export default Clothapi;

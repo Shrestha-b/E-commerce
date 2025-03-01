@@ -3,7 +3,7 @@ import {RfH, RfW, responsiveFontSize} from '../utils/helpers';
 import Colors from '../themes/Colors';
 import Fonts from '../themes/Fonts';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import LogOut from '../comonents/DrawerComponent.tsx/LoginOut';
+import LogOut from '../comonents/DrawerComponent.tsx/LoginOut'; 
 import { NavigationContainer } from '@react-navigation/native';
 
 function CustomDrawerContent({navigation}: any) {
@@ -11,7 +11,6 @@ function CustomDrawerContent({navigation}: any) {
     <View>
       <View
         style={{paddingHorizontal: RfW(20), paddingVertical: RfH(25), gap: 20}}>
-        
         {/* Navigate to Shops Screen */}
         <TouchableOpacity onPress={() => navigation.navigate('Shops')}>
           <View style={styles.headerContainer}>
@@ -29,7 +28,6 @@ const DrawerNavigator = () => {
   return (
       <Drawer.Navigator
         drawerContent={props => <CustomDrawerContent {...props} />}>
-
         {/* Welcome screen */}
         <Drawer.Screen
           name="Welcome"

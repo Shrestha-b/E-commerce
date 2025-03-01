@@ -1,26 +1,32 @@
-import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { RfH, RfW } from '../utils/helpers';
+import React, {useState} from 'react';
+import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {RfH, RfW} from '../utils/helpers';
 import Images from '../themes/Images';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { launchCamera, launchImageLibrary, ImagePickerResponse, Asset } from 'react-native-image-picker';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {
+  launchCamera,
+  launchImageLibrary,
+  ImagePickerResponse,
+  Asset,
+} from 'react-native-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 
 interface ImagePickerResult extends ImagePickerResponse {
   assets?: Asset[];
 }
 const MyProfile = () => {
-  const [imgUrl, setImgUrl] = useState('https://source.unsplash.com/random/400x300');
-//   const userdata = useSelector((state: any) => state.user);
+  const [imgUrl, setImgUrl] = useState(
+    'https://www.freepik.com/free-photos-vectors/human-cartoon',
+  );
+  //   const userdata = useSelector((state: any) => state.user);
 
-const storeData = async() =>{
-  await AsyncStorage.setItem("Image",imgUrl)
-}
+  const storeData = async () => {
+    await AsyncStorage.setItem('Image', imgUrl);
+  };
 
-const getData = async() => {
-  await AsyncStorage.getItem('Image')
-}
+  const getData = async () => {
+    await AsyncStorage.getItem('Image');
+  };
   // Function to open the camera and handle image picking
   const openCamera = async () => {
     console.log('Camera Pressed');
@@ -31,10 +37,9 @@ const getData = async() => {
 
     console.log('Camera Result:', result);
 
-    if (result.assets && result.assets.length > 0) {
+    if(result.assets && result.assets.length > 0) {
       setImgUrl(result.assets[0].uri || imgUrl);
     }
-
   };
 
   // Function to open the image library and handle image picking
@@ -51,12 +56,11 @@ const getData = async() => {
     }
   };
 
-
   const handleCameradata = () => {
     openCamera();
     storeData();
-    // openAlbum()
-  }
+    openAlbum();
+  };
   return (
     <View style={styles.container}>
       <View style={styles.headercontainer}>
@@ -67,12 +71,17 @@ const getData = async() => {
       </View>
       <View style={styles.profile}>
         <TouchableOpacity onPress={handleCameradata}>
-          <Image style={styles.profileImg} source={{ uri: imgUrl }} />
+          <Image style={styles.profileImg} source={{uri: imgUrl}} />
+          {/* Images.Male  */}
         </TouchableOpacity>
         <TouchableOpacity onPress={getData}>
-        <Text style={{ fontWeight: '600', fontSize: 20, marginTop: 20 }}>Hi, Alia</Text>
+          <Text style={{fontWeight: '600', fontSize: 20, marginTop: 20}}>
+            Hi, Alia
+          </Text>
         </TouchableOpacity>
-        <Text style={{ fontWeight: '400', fontSize: 14, marginTop: 5 }}>youremail@domain.com | +09 234 567 89</Text>
+        <Text style={{fontWeight: '400', fontSize: 14, marginTop: 5}}>
+          youremail@domain.com | +09 234 567 89
+        </Text>
       </View>
       <View style={styles.footer}>
         <Text style={styles.txtstyle}>Edit Profile Information</Text>
@@ -83,7 +92,7 @@ const getData = async() => {
         <Text style={styles.txtstyle}>Contact Us</Text>
         <Text style={styles.txtstyle}>Privacy & Policy</Text>
       </View>
-    </View>
+    </View>    
   );
 };
 

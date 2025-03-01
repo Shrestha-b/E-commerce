@@ -12,7 +12,7 @@ type RoutProps = {
 const Matrimony: React.FC<RoutProps> = ({ navigation, route}) => {
   return (
     <View>
-      <HomeScreen navigation={navigation} route={route}/>
+      <HomeScreen navigation={navigation} />
       <MatrimonyProfile />
     </View>
   );
