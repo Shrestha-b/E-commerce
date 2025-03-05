@@ -1,33 +1,50 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
-import {RfH, RfW} from '../utils/helpers';
-import Images from '../themes/Images';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   launchCamera,
   launchImageLibrary,
   ImagePickerResponse,
   Asset,
 } from 'react-native-image-picker';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import Images from '../themes/Images';
+import {RfH, RfW} from '../utils/helpers';
+import CustomAgreement from '../comonents/CustomAgreement';
 
 interface ImagePickerResult extends ImagePickerResponse {
   assets?: Asset[];
 }
+
 const MyProfile = () => {
-  const [imgUrl, setImgUrl] = useState(
-    'https://www.freepik.com/free-photos-vectors/human-cartoon',
-  );
-  //   const userdata = useSelector((state: any) => state.user);
+  const [imgUrl, setImgUrl] = useState<string | null | any>(null);
+  const [valueImg, setValueImg] = useState<string | null>(null);
 
-  const storeData = async () => {
-    await AsyncStorage.setItem('Image', imgUrl);
+  // Store image URL as a string
+  const storeData = async (url: string) => {
+    try {
+      await AsyncStorage.setItem('Image', url);
+      console.log('Image URL saved:', url);
+    } catch (error) {
+      console.error('Error saving data:', error);
+    }
   };
 
+  // Retrieve image URL and ensure it is a string
   const getData = async () => {
-    await AsyncStorage.getItem('Image');
+    try {
+      const value = await AsyncStorage.getItem('Image');
+      if (value) {
+        console.log('Retrieved Data:', value);
+        setValueImg(value); // Ensure valueImg is always a string
+      } else {
+        console.log('No data found');
+      }
+    } catch (error) {
+      console.error('Error retrieving data:', error);
+    }
   };
-  // Function to open the camera and handle image picking
+
+  // Open Camera and store image URL
   const openCamera = async () => {
     console.log('Camera Pressed');
     const result: ImagePickerResult = await launchCamera({
@@ -35,64 +52,89 @@ const MyProfile = () => {
       saveToPhotos: true,
     });
 
-    console.log('Camera Result:', result);
-
-    if(result.assets && result.assets.length > 0) {
-      setImgUrl(result.assets[0].uri || imgUrl);
+    if (result.assets && result.assets.length > 0) {
+      const imageUri = result.assets[0].uri || imgUrl;
+      setImgUrl(imageUri);
+      await storeData(imageUri);
     }
   };
 
-  // Function to open the image library and handle image picking
+  // Open Image Library and store image URL
   const openAlbum = async () => {
     console.log('Album Pressed');
     const result: ImagePickerResult = await launchImageLibrary({
       mediaType: 'photo',
     });
 
-    console.log('Album Result:', result);
-
     if (result.assets && result.assets.length > 0) {
-      setImgUrl(result.assets[0].uri || imgUrl);
+      const imageUri = result.assets[0].uri || imgUrl;
+      setImgUrl(imageUri);
+      await storeData(imageUri);
     }
   };
 
-  const handleCameradata = () => {
-    openCamera();
-    storeData();
-    openAlbum();
+  // Function to handle camera and album selection
+  const handleCameraData = async () => {
+    await openCamera();
+    await openAlbum();
   };
+
+  // Load stored image URL when component mounts
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.headercontainer}>
         <View style={styles.headerstyle}>
-          <Image style={styles.headerImg} source={Images.menuIcon} />
-          <Image style={styles.headerImg} source={Images.NotificationBell} />
+          <Text>{'Header'}</Text>
         </View>
       </View>
+
+      {valueImg ? (
+        <Image source={{uri: valueImg}} style={styles.profileImg} />
+      ) : (
+        <Text>{'No image found'}</Text>
+      )}
+
       <View style={styles.profile}>
-        <TouchableOpacity onPress={handleCameradata}>
-          <Image style={styles.profileImg} source={{uri: imgUrl}} />
-          {/* Images.Male  */}
+        <TouchableOpacity onPress={handleCameraData}>
+          {imgUrl ? (
+            <Image style={styles.profileImg} source={{uri: imgUrl}} />
+          ) : (
+            // <Text style={{fontSize: 30}}>please add image</Text>
+            <Image style={styles.profileImg} source={Images.editlogo} />
+          )}
         </TouchableOpacity>
+
         <TouchableOpacity onPress={getData}>
           <Text style={{fontWeight: '600', fontSize: 20, marginTop: 20}}>
             Hi, Alia
           </Text>
         </TouchableOpacity>
+
         <Text style={{fontWeight: '400', fontSize: 14, marginTop: 5}}>
-          youremail@domain.com | +09 234 567 89
+          {'youremail@domain.com | +09 234 567 89'}
         </Text>
       </View>
+
       <View style={styles.footer}>
-        <Text style={styles.txtstyle}>Edit Profile Information</Text>
-        <Text style={styles.txtstyle}>Notifications</Text>
-        <Text style={styles.txtstyle}>Language</Text>
-        <Text style={styles.txtstyle}>Security</Text>
-        <Text style={styles.txtstyle}>Help & Support</Text>
-        <Text style={styles.txtstyle}>Contact Us</Text>
-        <Text style={styles.txtstyle}>Privacy & Policy</Text>
+        <CustomAgreement
+          Aggreement="Edit Profile Information"
+          Name=''
+        />
+        <CustomAgreement Aggreement="Notifications" Name='' />
+        <CustomAgreement Aggreement="Language" Name='' />
+        <CustomAgreement Aggreement="Security" Name='' />
+        <CustomAgreement Name='' Aggreement="Help & Support" />
+        <CustomAgreement Name='' Aggreement="Contact Us" />
+        <CustomAgreement
+          Name='age'
+          Aggreement="Privacy & Policy"
+        />
       </View>
-    </View>    
+    </View>
   );
 };
 
@@ -103,39 +145,34 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headercontainer: {
-    height: RfH(141),
-    width: RfW(375),
+    height: 100,
+    width: '100%',
     backgroundColor: '#FF5069',
   },
   headerstyle: {
     marginTop: 10,
-    height: RfH(18),
-    width: RfW(335),
+    height: 18,
+    width: '90%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignSelf: 'center',
   },
-  headerImg: {
-    width: 28,
-    height: 28,
-  },
   profile: {
-    height: RfH(184),
-    width: RfW(287),
+    height: 184,
+    width: 287,
     alignItems: 'center',
     marginTop: -60,
   },
   profileImg: {
-    height: RfH(120),
-    width: RfW(120),
+    height: 120,
+    width: 120,
     borderRadius: 60, // Optional: Adding border radius to make the image circular
   },
   footer: {
     marginTop: 40,
-    backgroundColor: Colors.White,
+    backgroundColor: 'white',
     height: RfH(234),
     width: RfW(342),
-    gap: 10,
   },
   txtstyle: {
     fontSize: 14,
@@ -145,5 +182,4 @@ const styles = StyleSheet.create({
   },
 });
 
-// Export the component
 export default MyProfile;

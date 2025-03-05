@@ -12,8 +12,7 @@ import {BackHandler} from 'react-native';
 import Colors from '../themes/Colors';
 import Fonts from '../themes/Fonts';
 import Images from '../themes/Images';
-// import {ScreenName} from '../Navigations/ScreenNamesConstant';
-import {isEmpty} from 'lodash';
+// import {isEmpty} from 'lodash';
 import {useNavigation} from '@react-navigation/native';
 
 const CustomHeader = ({props}:any) => {
@@ -64,14 +63,14 @@ const CustomHeader = ({props}:any) => {
               gap: 20,
             }}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Image style={styles.arrowImg} source={Images.arrow2} />
+              <Image style={styles.arrowImg} source={Images.man} />
             </TouchableOpacity>
             <Text style={styles.headerText}>{headerTitle}</Text>
           </View>
           {showcart && (
             <TouchableOpacity
-              onPress={() => navigation.navigate(ScreenName.CART)}>
-              <Image style={styles.cartImg} source={Images.cart} />
+              onPress={() => navigation.navigate(ScreenName)}>
+              {/* <Image style={styles.cartImg} source={Images.cart} /> */}
               {!isEmpty(cartCount) && (
                 <View
                   style={{
@@ -110,7 +109,7 @@ const CustomHeader = ({props}:any) => {
             </TouchableOpacity>
             {showcart && (
               <TouchableOpacity
-                onPress={() => navigation.navigate(ScreenName.CART)}>
+                onPress={() => navigation.navigate()}>
                 <Image style={styles.cartImg} source={Images.cart} />
                 {!isEmpty(cartCount) && (
                   <View

@@ -28,8 +28,9 @@ import CartDetails from '../cart.tsx/CartDetails';
 import ImojisList from '../Imoji/ImojisList';
 import DrawerNavigator from './DrawarNavigation';
 import LogOut from '../comonents/DrawerComponent.tsx/LoginOut';
-import FormScreen from '../Form/FormScreen.js4';
+// import FormScreen from '../Form/FormScreen.js4';
 import ListScreen from '../Form/ListScreen';
+import CustomAgreement from '../comonents/CustomAgreement';
 
  
 
@@ -64,6 +65,7 @@ type StackParamList = {
   drawernavigator: undefined
   listScreen: undefined
   formScreen: undefined
+  customAgreement: undefined
   // DropdownHeader: undefined;  // Ensure this matches the name you're using
 };
 
@@ -91,7 +93,7 @@ function HomeNavigation() {
         <Stack.Screen name="MyProfile" component={MyProfile} options={{ headerShown: false }} />
         <Stack.Screen name="MetrimonyProfile" component={MatrimonyProfile} options={{ headerShown: false }} />
         <Stack.Screen name="Clothapi" component={Clothapi} options={{ headerShown: false }} />
-        <Stack.Screen name="Products" component={Products} options={{ headerShown: false }} />
+        {/* <Stack.Screen name="Products" component={Products} options={{ headerShown: false }} /> */}
         <Stack.Screen name="CartHeader" component={CartHeader} options={{ headerShown: false }} />
         <Stack.Screen name="Combo" component={Combo} options={{ headerShown: false }} />
         <Stack.Screen name="shoppingproduct" component={ShoppingProduct} options={{ headerShown: false }} />
@@ -101,9 +103,9 @@ function HomeNavigation() {
         <Stack.Screen name="imojislist" component={ImojisList} options={{ headerShown: false }} />
         <Stack.Screen name="logout" component={LogOut} options={{ headerShown: false }} />
         <Stack.Screen name="drawernavigator" component={DrawerNavigator} options={{ headerShown: false }} />
-        <Stack.Screen name="formScreen" component={FormScreen} options={{ headerShown: false }} />
+        {/* <Stack.Screen name="formScreen" component={FromScreen} options={{ headerShown: false }} /> */}
         <Stack.Screen name="listScreen" component={ListScreen} options={{ headerShown: false }} />
-
+        <Stack.Screen name="customAgreement" component={CustomAgreement} options={{ headerShown: false }} />
       </Stack.Navigator>
 
     </NavigationContainer>

@@ -2,21 +2,14 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {memo, useEffect} from 'react';
 import {
   RfH,
-  RfW,
-  SCREEN_WIDTH,
-  getColorWithOpacity,
   responsiveFontSize,
 } from '../utils/helpers';
-
-import {BackHandler} from 'react-native';
 import Colors from '../themes/Colors';
 import Fonts from '../themes/Fonts';
 import Images from '../themes/Images';
 
-
 const DropdownHeader = ({props}:any) => {
   const {headerTitle, onClickBack, showcart = true, cartCount} = props;
-
   return (
     <View style={styles.header}>
       <View style={{flexDirection: 'row', alignItems: 'center', gap: 20}}>
@@ -47,7 +40,6 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.UfontMedium,
     fontSize: responsiveFontSize(18),
   },
-
   arrowImg: {
     width: 25,
     height: 25,

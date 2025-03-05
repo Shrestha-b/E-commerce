@@ -34,8 +34,7 @@ const Clothapi: React.FC = () => {
 
   const getProducts = async () => {
     const URL = 'https://fakestoreapi.com/products';
-    // const URL = 'users/api-get-address';
-    // const URL = "https://taobao-api.p.rapidapi.com/api";
+    
 
     try {
       const response = await fetch(URL);

@@ -10,11 +10,9 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 // Define the parameter types for each screen in the stack
 type StackParamList = {
   Home: undefined;
-  Products: { item: Product[] }; // Assuming Products screen expects an array of Product as route params
-  // Add other screen types here as needed
+  Products: { item: Product[] }; 
 };
 
-// Define props for the Products screen
 type ProductsScreenProps = NativeStackScreenProps<StackParamList, 'Products'>;
 
 // Define the Product type
@@ -23,15 +21,13 @@ interface Product {
   id: number;
   Price: number;
   Image: string;
+  item: Product[];
 }
 
-// Define the props for the Products component
-interface ProductsProps {
-  item: Product[]; // item is an array of Product objects
-}
+
 
 // Products component definition
-const Products:React.FC<ProductsProps> = ({ item }) => {
+const Products:React.FC<Product> = ({ item }) => {
   const [addedToCart, setAddedToCart] = useState<{ [key: number]: boolean }>({}); // Track added status by product ID
   const dispatch = useDispatch();
   const cartItems = useSelector((state: any) => state.cart.cartItems || []);
